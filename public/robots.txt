@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin routes
+User-agent: *
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://blackarrowtechnologies.com/sitemap.xml

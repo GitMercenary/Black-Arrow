@@ -1,0 +1,10 @@
+PLACEHOLDER: Apple Touch Icon (180x180px)
+
+To create this file:
+1. Use the favicon.svg as a base
+2. Export it as a 180x180px PNG with:
+   - Background: #0A0A0A (Deep Obsidian)
+   - Logo centered with appropriate padding
+3. Save as apple-touch-icon.png
+
+For now, the SVG favicon will serve as a fallback.

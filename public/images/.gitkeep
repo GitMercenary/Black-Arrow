@@ -1,0 +1,10 @@
+# Images Directory
+
+This directory contains website images.
+
+## Structure:
+- hero/ - Hero section backgrounds
+- services/ - Service page images
+- case-studies/ - Case study screenshots
+- team/ - Team member photos
+- blog/ - Blog post featured images

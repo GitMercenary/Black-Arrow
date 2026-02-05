@@ -1,0 +1,11 @@
+PLACEHOLDER: Open Graph Image (1200x630px)
+
+To create this file:
+1. Create a 1200x630px image with:
+   - Background: #0A0A0A (Deep Obsidian)
+   - Logo (icon + text) positioned left-center
+   - Tagline "Precision. Performance. Profit." below logo
+   - Accent color: #C9A46B (Warm Sand) for logo icon
+2. Save as og-image.png
+
+This image appears when sharing links on social media (Facebook, Twitter, LinkedIn, etc.)
