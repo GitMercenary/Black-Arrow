@@ -50,26 +50,17 @@ function detectRegionFromTimezone(): RegionCode {
 
 async function detectRegionFromIP(): Promise<RegionCode | null> {
   // Try multiple IP geolocation services for better reliability
+  // All services must use HTTPS to avoid mixed content errors
   const services = [
-    {
-      name: 'ip-api',
-      url: 'http://ip-api.com/json/?fields=countryCode',
-      extract: (data: any) => data.countryCode
-    },
     {
       name: 'ipapi.co',
       url: 'https://ipapi.co/json/',
       extract: (data: any) => data.country_code
     },
     {
-      name: 'ipify',
-      url: 'https://api.ipify.org?format=json',
-      extract: async (data: any) => {
-        // First get IP, then get location
-        const ipResponse = await fetch(`http://ip-api.com/json/${data.ip}?fields=countryCode`);
-        const ipData = await ipResponse.json();
-        return ipData.countryCode;
-      }
+      name: 'ipwho.is',
+      url: 'https://ipwho.is/',
+      extract: (data: any) => data.country_code
     }
   ];
 
