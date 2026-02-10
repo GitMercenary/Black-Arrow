@@ -46,6 +46,11 @@ export default function Footer() {
                   Technical SEO
                 </Link>
               </li>
+              <li>
+                <Link href="/services/website-development" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                  Website Development
+                </Link>
+              </li>
             </ul>
           </div>
 

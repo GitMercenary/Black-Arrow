@@ -4,15 +4,20 @@ import "./globals.css";
 import { RegionProvider } from "@/lib/contexts/RegionContext";
 import { AIAuditProvider } from "@/lib/contexts/AIAuditContext";
 import { ThemeProvider } from "@/lib/contexts/ThemeContext";
+import { ServiceIntentProvider } from "@/lib/contexts/ServiceIntentContext";
+import { WebDevQuoteProvider } from "@/lib/contexts/WebDevQuoteContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NewsletterPopup from "@/components/forms/NewsletterPopup";
 import AIAuditPopupWrapper from "@/components/forms/AIAuditPopupWrapper";
+import WebDevQuotePopup from "@/components/forms/WebDevQuotePopup";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import Chatbot from "@/components/chat/Chatbot";
 import MicrosoftClarity from "@/components/analytics/MicrosoftClarity";
 import CookieConsent from "@/components/legal/CookieConsent";
 import ViewportFix from "@/components/utils/ViewportFix";
+import StickyIntentReminder from "@/components/ui/StickyIntentReminder";
+import StickyServiceBar from "@/components/ui/StickyServiceBar";
 
 // Original branding (kept for reference)
 const unbounded = Unbounded({
@@ -112,17 +117,24 @@ export default function RootLayout({
         <ViewportFix />
         <ThemeProvider>
           <RegionProvider>
-            <AIAuditProvider>
-              <Header />
-              {children}
-              <Footer />
-              <NewsletterPopup delaySeconds={10} />
-              <Chatbot />
-              <AIAuditPopupWrapper />
-              <ExitIntentPopup />
-              <MicrosoftClarity />
-              <CookieConsent />
-            </AIAuditProvider>
+            <ServiceIntentProvider>
+              <AIAuditProvider>
+                <WebDevQuoteProvider>
+                  <Header />
+                  {children}
+                  <Footer />
+                  <StickyIntentReminder />
+                  <StickyServiceBar />
+                  <NewsletterPopup delaySeconds={10} />
+                  <Chatbot />
+                  <AIAuditPopupWrapper />
+                  <WebDevQuotePopup />
+                  <ExitIntentPopup />
+                  <MicrosoftClarity />
+                  <CookieConsent />
+                </WebDevQuoteProvider>
+              </AIAuditProvider>
+            </ServiceIntentProvider>
           </RegionProvider>
         </ThemeProvider>
       </body>

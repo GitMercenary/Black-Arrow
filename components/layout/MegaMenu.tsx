@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ShoppingCart, TrendingUp, Zap, Search, ArrowRight, Briefcase, FileText } from 'lucide-react';
+import { ShoppingCart, TrendingUp, Zap, Search, ArrowRight, Briefcase, FileText, Code } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import Button from '../ui/Button';
 
@@ -34,6 +34,13 @@ const SERVICES = [
     description: 'Core Web Vitals & structured data',
     href: '/services/seo',
     stat: 'Page 3 → Position 2',
+  },
+  {
+    icon: Code,
+    title: 'Website Development',
+    description: 'Landing pages, business sites & web apps',
+    href: '/services/website-development',
+    stat: 'From £350 / ₹29,999',
   },
 ];
 

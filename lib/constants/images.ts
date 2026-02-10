@@ -167,6 +167,26 @@ export const IMAGES = {
     seo: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=80',
   },
 
+  websiteDev: {
+    // Website on multiple devices (responsive design)
+    responsive: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&q=80',
+
+    // Code editor / development
+    coding: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80',
+
+    // Modern web design on laptop
+    webDesign: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
+
+    // Landing page / conversion focused
+    landing: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
+
+    // Business meeting / consultation
+    consultation: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80',
+
+    // Coffee shop / restaurant interior
+    restaurant: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&q=80',
+  },
+
   placeholders: {
     // Neutral placeholder
     default: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=60',

@@ -32,7 +32,7 @@ export default function OptimizedImage({
   const isFillImage = props.fill === true;
 
   // Default sizes for fill images if not provided
-  const imageSizes = props.sizes || (isFillImage ? '100vw' : undefined);
+  const imageSizes = props.sizes || (isFillImage ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' : undefined);
 
   // For fill images, we need a wrapper with relative positioning
   if (isFillImage) {

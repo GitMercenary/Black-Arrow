@@ -18,6 +18,18 @@ const STATUS_COLORS: Record<string, string> = {
   lost: 'bg-red-500/20 text-red-400',
 };
 
+const SERVICE_LABELS: Record<string, { label: string; color: string }> = {
+  'webdev_website-development': { label: 'Website Dev', color: 'bg-indigo-500/20 text-indigo-400' },
+  'webdev_landing-page': { label: 'Landing Page', color: 'bg-emerald-500/20 text-emerald-400' },
+  'webdev_business-site': { label: 'Business Site', color: 'bg-blue-500/20 text-blue-400' },
+  'webdev_custom-web-app': { label: 'Custom Web App', color: 'bg-purple-500/20 text-purple-400' },
+};
+
+function getServiceTag(serviceInterest: string | null) {
+  if (!serviceInterest) return null;
+  return SERVICE_LABELS[serviceInterest] || { label: serviceInterest, color: 'bg-gray-500/20 text-gray-400' };
+}
+
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [regions, setRegions] = useState<Region[]>([]);
@@ -136,12 +148,13 @@ export default function LeadsPage() {
         {/* Leads Table */}
         <Card hover={false}>
           <div className="overflow-x-auto -mx-6 px-6">
-            <table className="w-full min-w-[900px]">
+            <table className="w-full min-w-[1050px]">
               <thead>
                 <tr className="border-b border-slate-ui">
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Name</th>
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
+                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Service</th>
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Region</th>
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
                   <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
@@ -152,13 +165,13 @@ export default function LeadsPage() {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={8} className="text-center py-8 text-cloud-dancer/40">
+                    <td colSpan={9} className="text-center py-8 text-cloud-dancer/40">
                       Loading...
                     </td>
                   </tr>
                 ) : filteredLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="text-center py-8 text-cloud-dancer/40">
+                    <td colSpan={9} className="text-center py-8 text-cloud-dancer/40">
                       No leads found
                     </td>
                   </tr>
@@ -168,6 +181,18 @@ export default function LeadsPage() {
                       <td className="py-4 px-4 font-medium">{lead.name}</td>
                       <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.email}</td>
                       <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
+                      <td className="py-4 px-4">
+                        {(() => {
+                          const tag = getServiceTag(lead.service_interest);
+                          return tag ? (
+                            <span className={`px-2 py-1 rounded text-xs font-medium ${tag.color}`}>
+                              {tag.label}
+                            </span>
+                          ) : (
+                            <span className="text-cloud-dancer/40 text-sm">—</span>
+                          );
+                        })()}
+                      </td>
                       <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{getRegionName(lead.region_id)}</td>
                       <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
                       <td className="py-4 px-4">
@@ -236,7 +261,14 @@ export default function LeadsPage() {
                 </div>
                 <div>
                   <label className="text-sm text-cloud-dancer/60">Service Interest</label>
-                  <p>{selectedLead.service_interest || '—'}</p>
+                  {(() => {
+                    const tag = getServiceTag(selectedLead.service_interest);
+                    return tag ? (
+                      <p className="mt-1"><span className={`px-3 py-1 rounded text-sm font-medium ${tag.color}`}>{tag.label}</span></p>
+                    ) : (
+                      <p>{selectedLead.service_interest || '—'}</p>
+                    );
+                  })()}
                 </div>
                 <div>
                   <label className="text-sm text-cloud-dancer/60">Region</label>
