@@ -61,22 +61,22 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-deep-obsidian">
-        <p className="text-gray-500 dark:text-cloud-dancer/60">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-deep-obsidian">
+        <p className="text-cloud-dancer/60">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-deep-obsidian flex">
+    <div className="min-h-screen bg-deep-obsidian flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-100 dark:bg-slate-ui/30 border-r border-gray-200 dark:border-slate-ui flex flex-col">
+      <aside className="w-64 bg-slate-ui/30 border-r border-slate-ui flex flex-col">
         {/* Logo */}
-        <div className="p-6 border-b border-gray-200 dark:border-slate-ui">
-          <Link href="/admin/dashboard" className="text-xl font-unbounded font-bold text-gray-900 dark:text-cloud-dancer">
+        <div className="p-6 border-b border-slate-ui">
+          <Link href="/admin/dashboard" className="text-xl font-unbounded font-bold">
             BLACK ARROW
           </Link>
-          <p className="text-xs text-gray-500 dark:text-cloud-dancer/60 mt-1">Admin Portal</p>
+          <p className="text-xs text-cloud-dancer/60 mt-1">Admin Portal</p>
         </div>
 
         {/* Navigation */}
@@ -92,7 +92,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                     className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
                       isActive
                         ? 'bg-warm-sand/20 text-warm-sand'
-                        : 'text-gray-600 dark:text-cloud-dancer/70 hover:bg-gray-200 dark:hover:bg-slate-ui/50 hover:text-gray-900 dark:hover:text-cloud-dancer'
+                        : 'text-cloud-dancer/70 hover:bg-slate-ui/50 hover:text-cloud-dancer'
                     }`}
                   >
                     <Icon size={20} />
@@ -105,14 +105,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </nav>
 
         {/* User Info & Sign Out */}
-        <div className="p-4 border-t border-gray-200 dark:border-slate-ui">
+        <div className="p-4 border-t border-slate-ui">
           <div className="mb-4">
-            <p className="text-sm font-medium truncate text-gray-900 dark:text-cloud-dancer">{user?.full_name || 'Admin'}</p>
-            <p className="text-xs text-gray-500 dark:text-cloud-dancer/60 truncate">{user?.email}</p>
+            <p className="text-sm font-medium truncate">{user?.full_name || 'Admin'}</p>
+            <p className="text-xs text-cloud-dancer/60 truncate">{user?.email}</p>
           </div>
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-2 text-gray-500 dark:text-cloud-dancer/60 hover:text-red-400 transition-colors text-sm w-full"
+            className="flex items-center gap-2 text-cloud-dancer/60 hover:text-red-400 transition-colors text-sm w-full"
           >
             <LogOut size={16} />
             Sign Out
