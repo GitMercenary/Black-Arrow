@@ -153,14 +153,16 @@ export default function AdminLoginPage() {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
 
-            <button
-              type="button"
-              onClick={handleForgotPassword}
-              disabled={resetLoading}
-              className="w-full text-center text-sm text-cloud-dancer/50 hover:text-warm-sand transition-colors mt-2"
-            >
-              {resetLoading ? 'Sending reset email...' : 'Forgot Password?'}
-            </button>
+            <div className="text-center pt-2 border-t border-slate-ui/30">
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                disabled={resetLoading}
+                className="text-warm-sand hover:text-warm-sand/80 text-sm font-medium underline underline-offset-4 transition-colors"
+              >
+                {resetLoading ? 'Sending reset email...' : 'Forgot Password?'}
+              </button>
+            </div>
           </form>
         </Card>
       </div>
