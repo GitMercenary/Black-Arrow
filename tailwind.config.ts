@@ -31,7 +31,9 @@ const config: Config = {
           800: '#292524',
           900: '#1C1917',
         },
-        // Dark mode grays (replacing slate-ui blue)
+        // Admin panel UI gray
+        'slate-ui': '#4B5563',
+        // Dark mode grays
         'neutral': {
           50: '#FAFAFA',
           100: '#F5F5F5',

@@ -82,7 +82,6 @@ async function detectRegionFromIP(): Promise<RegionCode | null> {
       const countryCode = await service.extract(data);
 
       if (countryCode && COUNTRY_TO_REGION[countryCode]) {
-        console.log(`✓ Region detected from ${service.name}: ${countryCode} → ${COUNTRY_TO_REGION[countryCode]}`);
         return COUNTRY_TO_REGION[countryCode];
       }
     } catch (error) {

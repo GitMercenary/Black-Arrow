@@ -24,7 +24,7 @@ export default function Logo({ variant = 'full', className = '' }: LogoProps) {
   if (variant === 'icon') {
     return (
       <div className={className} aria-label="Black Arrow Technologies Logo">
-        <ArrowIcon className="w-10 h-10 text-gray-900 dark:text-warm-sand transition-colors" />
+        <ArrowIcon className="w-10 h-10 text-gray-900 dark:text-[#C9A46B] transition-colors" />
       </div>
     );
   }
@@ -40,7 +40,7 @@ export default function Logo({ variant = 'full', className = '' }: LogoProps) {
   // Full logo with icon and text
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <ArrowIcon className="w-10 h-10 text-gray-900 dark:text-warm-sand transition-colors" />
+      <ArrowIcon className="w-10 h-10 text-gray-900 dark:text-[#C9A46B] transition-colors" />
       <span className="font-unbounded font-bold text-xl text-gray-900 dark:text-cloud-dancer">
         BLACK ARROW
       </span>

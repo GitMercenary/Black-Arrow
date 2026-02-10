@@ -5,7 +5,7 @@ import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import { BentoCard } from '@/components/ui/Card';
 import BentoGrid from '@/components/ui/BentoGrid';
-import { ShoppingCart, TrendingUp, Zap, Search } from 'lucide-react';
+import { ShoppingCart, TrendingUp, Zap, Search, Code } from 'lucide-react';
 import FadeIn from '@/components/animations/FadeIn';
 import OptimizedImage from '@/components/ui/OptimizedImage';
 import { IMAGES } from '@/lib/constants/images';
@@ -39,6 +39,13 @@ const SERVICES = [
     description: 'Core Web Vitals optimization, structured data, and content strategies that Google rewards.',
     href: '/services/seo',
     stat: 'Page 3 → Position 2',
+  },
+  {
+    icon: <Code size={48} strokeWidth={2} />,
+    title: 'Website Development',
+    description: 'Landing pages, business sites, and custom web apps built for conversion and speed.',
+    href: '/services/website-development',
+    stat: 'From £350 / ₹29,999',
   },
 ];
 

@@ -172,7 +172,7 @@ export default function Chatbot() {
         <button
           onClick={() => setIsOpen(true)}
           className={cn(
-            'fixed bottom-6 right-6 z-50',
+            'fixed bottom-6 right-6 z-[110]',
             'w-14 h-14 rounded-full',
             'bg-warm-sand text-deep-obsidian',
             'shadow-lg hover:shadow-xl',
@@ -191,7 +191,7 @@ export default function Chatbot() {
       {isOpen && (
         <div
           className={cn(
-            'fixed bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-50',
+            'fixed bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-[110]',
             'w-full sm:w-96 max-w-[calc(100vw-2rem)] bg-white dark:bg-deep-obsidian border-2 border-warm-sand rounded-xl shadow-2xl',
             'flex flex-col',
             'animate-in slide-in-from-bottom-4 fade-in duration-300',

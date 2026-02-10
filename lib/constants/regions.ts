@@ -29,8 +29,8 @@ export const REGIONS: Record<RegionCode, Region> = {
     contact: {
       companyName: 'Lateral View Solutions Ltd',
       address: '71-75 Shelton Street, Covent Garden, London WC2H 9JQ',
-      phone: '+44 7438 381906',
-      whatsapp: '+44 7506 827925',
+      phone: '07438 381 906',
+      whatsapp: '+44 7506 827 925',
       email: 'info@blackarrowtechnologies.com',
     },
   },

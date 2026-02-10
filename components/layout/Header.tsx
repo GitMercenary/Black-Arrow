@@ -5,7 +5,7 @@ import { useRegion } from '@/lib/contexts/RegionContext';
 import { useAIAudit } from '@/lib/contexts/AIAuditContext';
 import { useTheme } from '@/lib/contexts/ThemeContext';
 import { REGIONS } from '@/lib/constants/regions';
-import { Globe, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Globe, ChevronDown, Sun, Moon, ShoppingCart, TrendingUp, Zap, Search, Code } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import MegaMenu from './MegaMenu';
 import Logo from '@/components/ui/Logo';
@@ -19,6 +19,7 @@ export default function Header() {
   const [regionMenuOpen, setRegionMenuOpen] = useState(false);
   const [mobileRegionMenuOpen, setMobileRegionMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
@@ -257,13 +258,37 @@ export default function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-2">
-            <Link
-              href="/services"
-              className="block text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors py-3 min-h-[44px]"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Services
-            </Link>
+            <div>
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="flex items-center justify-between w-full text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors py-3 min-h-[44px]"
+              >
+                <span>Services</span>
+                <ChevronDown size={16} className={`transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {mobileServicesOpen && (
+                <div className="pl-4 pb-2 space-y-1">
+                  <Link href="/services" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    All Services
+                  </Link>
+                  <Link href="/services/ecommerce" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <ShoppingCart size={16} className="text-warm-sand" /> E-Commerce
+                  </Link>
+                  <Link href="/services/ads" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <TrendingUp size={16} className="text-warm-sand" /> Performance Ads
+                  </Link>
+                  <Link href="/services/automation" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Zap size={16} className="text-warm-sand" /> Automation & AI
+                  </Link>
+                  <Link href="/services/seo" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Search size={16} className="text-warm-sand" /> Technical SEO
+                  </Link>
+                  <Link href="/services/website-development" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Code size={16} className="text-warm-sand" /> Website Development
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link
               href="/case-studies"
               className="block text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors py-3 min-h-[44px]"

@@ -126,13 +126,28 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-warm-sand/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-300">
-          <p>&copy; {new Date().getFullYear()} Black Arrow Technologies. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <span className="text-gray-500 dark:text-cloud-dancer/40">GDPR Compliant</span>
-            <span className="text-gray-500 dark:text-cloud-dancer/40">Google Partner</span>
-            <span className="text-gray-500 dark:text-cloud-dancer/40">Meta Business Partner</span>
+        <div className="mt-12 pt-8 border-t border-warm-sand/20">
+          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-300">
+            <p>&copy; {new Date().getFullYear()} Black Arrow Technologies. All rights reserved.</p>
+            <div className="flex flex-wrap justify-center gap-4 mt-4 md:mt-0">
+              <Link href="/legal/privacy" className="text-gray-500 dark:text-cloud-dancer/40 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/legal/cookies" className="text-gray-500 dark:text-cloud-dancer/40 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                Cookie Policy
+              </Link>
+              <Link href="/legal/terms" className="text-gray-500 dark:text-cloud-dancer/40 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                Terms
+              </Link>
+              <span className="text-gray-500 dark:text-cloud-dancer/40">Google Partner</span>
+              <span className="text-gray-500 dark:text-cloud-dancer/40">Meta Business Partner</span>
+            </div>
           </div>
+          {currentRegion === 'UK' && (
+            <p className="text-xs text-gray-400 dark:text-cloud-dancer/30 text-center mt-4">
+              Black Arrow Technologies is a trading name of Lateral View Solutions Ltd (Company No: 16673116).
+            </p>
+          )}
         </div>
       </div>
     </footer>

@@ -134,7 +134,7 @@ export default function NewBlogPostPage() {
         <div className="mb-8">
           <button
             onClick={() => router.push('/admin/blog')}
-            className="flex items-center gap-2 text-cloud-dancer/60 hover:text-cloud-dancer transition-colors mb-4"
+            className="flex items-center gap-2 text-gray-500 dark:text-cloud-dancer/60 hover:text-gray-900 dark:hover:text-cloud-dancer transition-colors mb-4"
           >
             <ArrowLeft size={18} />
             Back to Blog
@@ -161,7 +161,7 @@ export default function NewBlogPostPage() {
                 type="text"
                 value={formData.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
                 placeholder="Enter post title (min 10 characters)"
                 required
               />
@@ -177,11 +177,11 @@ export default function NewBlogPostPage() {
                 type="text"
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none font-mono text-sm"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none font-mono text-sm"
                 placeholder="post-url-slug"
                 required
               />
-              <p className="text-xs text-cloud-dancer/60 mt-1">
+              <p className="text-xs text-gray-500 dark:text-cloud-dancer/60 mt-1">
                 URL: /blog/{formData.slug || 'your-slug'}
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function NewBlogPostPage() {
                 value={formData.excerpt}
                 onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                 rows={2}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
                 placeholder="Short summary for blog cards (optional)"
               />
             </div>
@@ -211,7 +211,7 @@ export default function NewBlogPostPage() {
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                 rows={16}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none font-mono text-sm"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none font-mono text-sm"
                 placeholder="Write your post content in Markdown..."
                 required
               />
@@ -227,13 +227,13 @@ export default function NewBlogPostPage() {
                 type="url"
                 value={formData.featured_image}
                 onChange={(e) => setFormData({ ...formData, featured_image: e.target.value })}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
 
             {/* SEO Section */}
-            <div className="border-t border-slate-ui pt-6">
+            <div className="border-t border-gray-200 dark:border-slate-ui pt-6">
               <h3 className="text-lg font-unbounded font-bold mb-4">SEO Settings</h3>
 
               <div className="space-y-4">
@@ -247,7 +247,7 @@ export default function NewBlogPostPage() {
                     type="text"
                     value={formData.meta_title}
                     onChange={(e) => setFormData({ ...formData, meta_title: e.target.value })}
-                    className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
                     placeholder="Leave blank to use post title"
                   />
                 </div>
@@ -263,10 +263,10 @@ export default function NewBlogPostPage() {
                     onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
                     rows={2}
                     maxLength={160}
-                    className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
                     placeholder="SEO description (max 160 characters)"
                   />
-                  <p className="text-xs text-cloud-dancer/60 mt-1">
+                  <p className="text-xs text-gray-500 dark:text-cloud-dancer/60 mt-1">
                     {formData.meta_description.length}/160 characters
                   </p>
                 </div>
@@ -274,9 +274,9 @@ export default function NewBlogPostPage() {
             </div>
 
             {/* Regional Targeting */}
-            <div className="border-t border-slate-ui pt-6">
+            <div className="border-t border-gray-200 dark:border-slate-ui pt-6">
               <h3 className="text-lg font-unbounded font-bold mb-4">Regional Targeting</h3>
-              <p className="text-sm text-cloud-dancer/60 mb-4">
+              <p className="text-sm text-gray-500 dark:text-cloud-dancer/60 mb-4">
                 Select which regions should see this post
               </p>
               <div className="flex gap-4">
@@ -286,7 +286,7 @@ export default function NewBlogPostPage() {
                       type="checkbox"
                       checked={formData.region_tags.includes(region)}
                       onChange={() => toggleRegion(region)}
-                      className="w-4 h-4 rounded border-slate-ui bg-deep-obsidian checked:bg-warm-sand checked:border-warm-sand focus:ring-0 focus:outline-none cursor-pointer"
+                      className="w-4 h-4 rounded border-gray-300 dark:border-slate-ui bg-gray-50 dark:bg-deep-obsidian checked:bg-warm-sand checked:border-warm-sand focus:ring-0 focus:outline-none cursor-pointer"
                     />
                     <span>{region}</span>
                   </label>
@@ -295,7 +295,7 @@ export default function NewBlogPostPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-4 pt-6 border-t border-slate-ui">
+            <div className="flex gap-4 pt-6 border-t border-gray-200 dark:border-slate-ui">
               <Button
                 variant="secondary"
                 onClick={(e) => {

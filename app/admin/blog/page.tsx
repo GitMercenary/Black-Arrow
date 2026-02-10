@@ -97,7 +97,7 @@ export default function BlogPage() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-unbounded font-bold mb-2">Blog Posts</h1>
-            <p className="text-cloud-dancer/60">
+            <p className="text-gray-500 dark:text-cloud-dancer/60">
               {stats.total} total · {stats.published} published · {stats.drafts} drafts
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function BlogPage() {
         {/* Filters */}
         <Card hover={false} className="mb-6 p-4">
           <div className="flex items-center gap-4">
-            <span className="text-sm text-cloud-dancer/60">Filter:</span>
+            <span className="text-sm text-gray-500 dark:text-cloud-dancer/60">Filter:</span>
             <div className="flex gap-2">
               {['all', 'published', 'draft'].map(status => (
                 <button
@@ -119,7 +119,7 @@ export default function BlogPage() {
                   className={`px-4 py-2 rounded-md text-sm transition-colors ${
                     filterStatus === status
                       ? 'bg-warm-sand text-deep-obsidian'
-                      : 'bg-slate-ui/50 text-cloud-dancer/70 hover:bg-slate-ui'
+                      : 'bg-gray-200 dark:bg-slate-ui/50 text-gray-600 dark:text-cloud-dancer/70 hover:bg-gray-300 dark:hover:bg-slate-ui'
                   }`}
                 >
                   {status === 'all' ? 'All Posts' : status === 'published' ? 'Published' : 'Drafts'}
@@ -132,12 +132,12 @@ export default function BlogPage() {
         {/* Posts Grid */}
         {loading ? (
           <Card hover={false} className="p-8 text-center">
-            <p className="text-cloud-dancer/60">Loading posts...</p>
+            <p className="text-gray-500 dark:text-cloud-dancer/60">Loading posts...</p>
           </Card>
         ) : filteredPosts.length === 0 ? (
           <Card hover={false} className="p-8 text-center">
-            <FileText size={48} className="mx-auto mb-4 text-cloud-dancer/30" />
-            <p className="text-cloud-dancer/60 mb-4">
+            <FileText size={48} className="mx-auto mb-4 text-gray-300 dark:text-cloud-dancer/30" />
+            <p className="text-gray-500 dark:text-cloud-dancer/60 mb-4">
               {filterStatus === 'all'
                 ? 'No blog posts yet. Create your first post!'
                 : `No ${filterStatus} posts found.`}
@@ -161,17 +161,17 @@ export default function BlogPage() {
                           Published
                         </span>
                       ) : (
-                        <span className="px-2 py-1 bg-slate-ui text-cloud-dancer/60 text-xs rounded">
+                        <span className="px-2 py-1 bg-gray-200 dark:bg-slate-ui text-gray-500 dark:text-cloud-dancer/60 text-xs rounded">
                           Draft
                         </span>
                       )}
                     </div>
 
                     {post.excerpt && (
-                      <p className="text-cloud-dancer/70 text-sm mb-3">{post.excerpt}</p>
+                      <p className="text-gray-600 dark:text-cloud-dancer/70 text-sm mb-3">{post.excerpt}</p>
                     )}
 
-                    <div className="flex items-center gap-4 text-xs text-cloud-dancer/60">
+                    <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-cloud-dancer/60">
                       <span>Slug: /{post.slug}</span>
                       {post.region_tags && post.region_tags.length > 0 && (
                         <span>Regions: {post.region_tags.join(', ')}</span>
@@ -187,14 +187,14 @@ export default function BlogPage() {
                   <div className="flex items-center gap-2 ml-4">
                     <button
                       onClick={() => togglePublish(post.id, post.published)}
-                      className="p-2 hover:bg-slate-ui rounded transition-colors"
+                      className="p-2 hover:bg-gray-200 dark:hover:bg-slate-ui rounded transition-colors"
                       title={post.published ? 'Unpublish' : 'Publish'}
                     >
                       {post.published ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                     <button
                       onClick={() => router.push(`/admin/blog/${post.id}/edit`)}
-                      className="p-2 hover:bg-slate-ui rounded transition-colors"
+                      className="p-2 hover:bg-gray-200 dark:hover:bg-slate-ui rounded transition-colors"
                       title="Edit"
                     >
                       <Edit size={18} />
