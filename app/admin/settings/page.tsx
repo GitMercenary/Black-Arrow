@@ -109,14 +109,14 @@ export default function SettingsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-unbounded font-bold mb-2">Regional Settings</h1>
-          <p className="text-cloud-dancer/60">
+          <p className="text-gray-500 dark:text-cloud-dancer/60">
             Manage contact information and settings for each region
           </p>
         </div>
 
         {loading ? (
           <Card hover={false} className="p-8 text-center">
-            <p className="text-cloud-dancer/60">Loading settings...</p>
+            <p className="text-gray-500 dark:text-cloud-dancer/60">Loading settings...</p>
           </Card>
         ) : (
           <div className="grid gap-6">
@@ -138,7 +138,7 @@ export default function SettingsPage() {
                           {region.code}
                         </span>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-cloud-dancer/60 mt-2">
+                      <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-cloud-dancer/60 mt-2">
                         <span className="flex items-center gap-1">
                           <Globe size={14} />
                           {region.currency}
@@ -183,7 +183,7 @@ export default function SettingsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Phone */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm text-cloud-dancer/60 mb-2">
+                      <label className="flex items-center gap-2 text-sm text-gray-500 dark:text-cloud-dancer/60 mb-2">
                         <Phone size={14} />
                         Phone Number
                       </label>
@@ -192,17 +192,17 @@ export default function SettingsPage() {
                           type="tel"
                           value={editForm.phone}
                           onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                          className="w-full px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
+                          className="w-full px-4 py-2 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
                           placeholder="+44 20 1234 5678"
                         />
                       ) : (
-                        <p className="text-cloud-dancer">{region.phone || '—'}</p>
+                        <p className="text-gray-900 dark:text-cloud-dancer">{region.phone || '—'}</p>
                       )}
                     </div>
 
                     {/* Timezone */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm text-cloud-dancer/60 mb-2">
+                      <label className="flex items-center gap-2 text-sm text-gray-500 dark:text-cloud-dancer/60 mb-2">
                         <Clock size={14} />
                         Timezone
                       </label>
@@ -211,17 +211,17 @@ export default function SettingsPage() {
                           type="text"
                           value={editForm.timezone}
                           onChange={(e) => setEditForm({ ...editForm, timezone: e.target.value })}
-                          className="w-full px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
+                          className="w-full px-4 py-2 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none"
                           placeholder="Europe/London"
                         />
                       ) : (
-                        <p className="text-cloud-dancer">{region.timezone || '—'}</p>
+                        <p className="text-gray-900 dark:text-cloud-dancer">{region.timezone || '—'}</p>
                       )}
                     </div>
 
                     {/* Address */}
                     <div className="md:col-span-2">
-                      <label className="flex items-center gap-2 text-sm text-cloud-dancer/60 mb-2">
+                      <label className="flex items-center gap-2 text-sm text-gray-500 dark:text-cloud-dancer/60 mb-2">
                         <MapPin size={14} />
                         Address
                       </label>
@@ -230,71 +230,71 @@ export default function SettingsPage() {
                           value={editForm.address}
                           onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
                           rows={2}
-                          className="w-full px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
+                          className="w-full px-4 py-2 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
                           placeholder="123 Tech Street, London, UK"
                         />
                       ) : (
-                        <p className="text-cloud-dancer">{region.address || '—'}</p>
+                        <p className="text-gray-900 dark:text-cloud-dancer">{region.address || '—'}</p>
                       )}
                     </div>
                   </div>
 
                   {/* Budget Ranges Info */}
-                  <div className="mt-6 pt-6 border-t border-slate-ui">
-                    <h4 className="text-sm font-medium mb-3 text-cloud-dancer/80">
+                  <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-ui">
+                    <h4 className="text-sm font-medium mb-3 text-gray-700 dark:text-cloud-dancer/80">
                       Budget Ranges for Lead Forms
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {region.code === 'UK' && (
                         <>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             £1,500+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             £5,000+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             £10,000+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             £25,000+
                           </span>
                         </>
                       )}
                       {region.code === 'UAE' && (
                         <>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             AED 5,000+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             AED 20,000+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             AED 40,000+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             AED 100,000+
                           </span>
                         </>
                       )}
                       {region.code === 'IND' && (
                         <>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             ₹1.5L+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             ₹5L+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             ₹10L+
                           </span>
-                          <span className="px-3 py-1 bg-slate-ui/50 text-cloud-dancer/80 text-xs rounded">
+                          <span className="px-3 py-1 bg-gray-200 dark:bg-slate-ui/50 text-gray-700 dark:text-cloud-dancer/80 text-xs rounded">
                             ₹25L+
                           </span>
                         </>
                       )}
                     </div>
-                    <p className="text-xs text-cloud-dancer/60 mt-2">
+                    <p className="text-xs text-gray-500 dark:text-cloud-dancer/60 mt-2">
                       These budget options are shown in the contact form for this region
                     </p>
                   </div>
@@ -305,9 +305,9 @@ export default function SettingsPage() {
         )}
 
         {/* Info Section */}
-        <Card hover={false} className="mt-8 p-6 bg-slate-ui/20">
+        <Card hover={false} className="mt-8 p-6 bg-gray-50 dark:bg-slate-ui/20">
           <h3 className="text-lg font-unbounded font-bold mb-3">About Regional Settings</h3>
-          <div className="text-sm text-cloud-dancer/70 space-y-2">
+          <div className="text-sm text-gray-600 dark:text-cloud-dancer/70 space-y-2">
             <p>
               • Regional settings control how contact information is displayed on your website
             </p>

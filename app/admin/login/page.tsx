@@ -95,17 +95,17 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-deep-obsidian px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-deep-obsidian px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-unbounded font-bold mb-2">BLACK ARROW</h1>
-          <p className="text-cloud-dancer/60">Admin Portal</p>
+          <h1 className="text-4xl font-unbounded font-bold mb-2 text-gray-900 dark:text-cloud-dancer">BLACK ARROW</h1>
+          <p className="text-gray-500 dark:text-cloud-dancer/60">Admin Portal</p>
         </div>
 
         <Card hover={false}>
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700 dark:text-cloud-dancer">
                 Email
               </label>
               <input
@@ -113,13 +113,13 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-gray-900 dark:text-cloud-dancer focus:border-warm-sand focus:outline-none"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
+              <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-700 dark:text-cloud-dancer">
                 Password
               </label>
               <input
@@ -127,7 +127,7 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-gray-900 dark:text-cloud-dancer focus:border-warm-sand focus:outline-none"
                 required
               />
             </div>

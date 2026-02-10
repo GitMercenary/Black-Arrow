@@ -99,16 +99,16 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-deep-obsidian px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-deep-obsidian px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-unbounded font-bold mb-2">BLACK ARROW</h1>
-          <p className="text-cloud-dancer/60">Reset Password</p>
+          <h1 className="text-4xl font-unbounded font-bold mb-2 text-gray-900 dark:text-cloud-dancer">BLACK ARROW</h1>
+          <p className="text-gray-500 dark:text-cloud-dancer/60">Reset Password</p>
         </div>
 
         <Card hover={false}>
           {checking ? (
-            <div className="text-center py-8 text-cloud-dancer/60">
+            <div className="text-center py-8 text-gray-500 dark:text-cloud-dancer/60">
               Verifying recovery link...
             </div>
           ) : success ? (
@@ -119,12 +119,12 @@ export default function ResetPasswordPage() {
                 </svg>
               </div>
               <h2 className="text-xl font-unbounded font-bold mb-2">Password Updated!</h2>
-              <p className="text-cloud-dancer/60">Redirecting to login...</p>
+              <p className="text-gray-500 dark:text-cloud-dancer/60">Redirecting to login...</p>
             </div>
           ) : hasSession ? (
             <form onSubmit={handleReset} className="space-y-6">
               <div>
-                <label htmlFor="password" className="block text-sm font-medium mb-2">
+                <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-700 dark:text-cloud-dancer">
                   New Password
                 </label>
                 <input
@@ -132,7 +132,7 @@ export default function ResetPasswordPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-gray-900 dark:text-cloud-dancer focus:border-warm-sand focus:outline-none"
                   placeholder="Minimum 6 characters"
                   required
                   minLength={6}
@@ -140,7 +140,7 @@ export default function ResetPasswordPage() {
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2 text-gray-700 dark:text-cloud-dancer">
                   Confirm Password
                 </label>
                 <input
@@ -148,7 +148,7 @@ export default function ResetPasswordPage() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-gray-900 dark:text-cloud-dancer focus:border-warm-sand focus:outline-none"
                   placeholder="Re-enter your password"
                   required
                   minLength={6}

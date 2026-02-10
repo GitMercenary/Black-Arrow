@@ -111,7 +111,7 @@ export default function LeadsPage() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-unbounded font-bold mb-2">Leads</h1>
-            <p className="text-cloud-dancer/60">{filteredLeads.length} leads</p>
+            <p className="text-gray-500 dark:text-cloud-dancer/60">{filteredLeads.length} leads</p>
           </div>
         </div>
 
@@ -119,13 +119,13 @@ export default function LeadsPage() {
         <Card hover={false} className="mb-6 p-4">
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2">
-              <Filter size={16} className="text-cloud-dancer/60" />
-              <span className="text-sm text-cloud-dancer/60">Filters:</span>
+              <Filter size={16} className="text-gray-500 dark:text-cloud-dancer/60" />
+              <span className="text-sm text-gray-500 dark:text-cloud-dancer/60">Filters:</span>
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-deep-obsidian border border-slate-ui rounded-md text-sm focus:border-warm-sand focus:outline-none"
+              className="px-3 py-2 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-sm focus:border-warm-sand focus:outline-none"
             >
               <option value="all">All Status</option>
               {STATUS_OPTIONS.map(status => (
@@ -135,7 +135,7 @@ export default function LeadsPage() {
             <select
               value={filterRegion}
               onChange={(e) => setFilterRegion(e.target.value)}
-              className="px-3 py-2 bg-deep-obsidian border border-slate-ui rounded-md text-sm focus:border-warm-sand focus:outline-none"
+              className="px-3 py-2 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md text-sm focus:border-warm-sand focus:outline-none"
             >
               <option value="all">All Regions</option>
               {regions.map(region => (
@@ -150,37 +150,37 @@ export default function LeadsPage() {
           <div className="overflow-x-auto -mx-6 px-6">
             <table className="w-full min-w-[1050px]">
               <thead>
-                <tr className="border-b border-slate-ui">
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Name</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Service</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Region</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Actions</th>
+                <tr className="border-b border-gray-200 dark:border-slate-ui">
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Name</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Service</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Region</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={9} className="text-center py-8 text-cloud-dancer/40">
+                    <td colSpan={9} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
                       Loading...
                     </td>
                   </tr>
                 ) : filteredLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="text-center py-8 text-cloud-dancer/40">
+                    <td colSpan={9} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
                       No leads found
                     </td>
                   </tr>
                 ) : (
                   filteredLeads.map((lead) => (
-                    <tr key={lead.id} className="border-b border-slate-ui/50 hover:bg-slate-ui/20 transition-colors">
+                    <tr key={lead.id} className="border-b border-gray-200 dark:border-slate-ui/50 hover:bg-gray-100 dark:hover:bg-slate-ui/20 transition-colors">
                       <td className="py-4 px-4 font-medium">{lead.name}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.email}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.email}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
                       <td className="py-4 px-4">
                         {(() => {
                           const tag = getServiceTag(lead.service_interest);
@@ -189,12 +189,12 @@ export default function LeadsPage() {
                               {tag.label}
                             </span>
                           ) : (
-                            <span className="text-cloud-dancer/40 text-sm">—</span>
+                            <span className="text-gray-400 dark:text-cloud-dancer/40 text-sm">—</span>
                           );
                         })()}
                       </td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{getRegionName(lead.region_id)}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{getRegionName(lead.region_id)}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
                       <td className="py-4 px-4">
                         <select
                           value={lead.status}
@@ -206,7 +206,7 @@ export default function LeadsPage() {
                           ))}
                         </select>
                       </td>
-                      <td className="py-4 px-4 text-cloud-dancer/60 text-sm">
+                      <td className="py-4 px-4 text-gray-500 dark:text-cloud-dancer/60 text-sm">
                         {new Date(lead.created_at).toLocaleDateString()}
                       </td>
                       <td className="py-4 px-4">
@@ -215,7 +215,7 @@ export default function LeadsPage() {
                             setSelectedLead(lead);
                             setNoteText(lead.notes || '');
                           }}
-                          className="p-2 hover:bg-slate-ui rounded transition-colors"
+                          className="p-2 hover:bg-gray-200 dark:hover:bg-slate-ui rounded transition-colors"
                           title="View Details"
                         >
                           <MessageSquare size={16} />
@@ -236,11 +236,11 @@ export default function LeadsPage() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-2xl font-unbounded font-bold">{selectedLead.name}</h2>
-                  <p className="text-cloud-dancer/60">{selectedLead.email}</p>
+                  <p className="text-gray-500 dark:text-cloud-dancer/60">{selectedLead.email}</p>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
-                  className="p-2 hover:bg-slate-ui rounded transition-colors"
+                  className="p-2 hover:bg-gray-200 dark:hover:bg-slate-ui rounded transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -248,19 +248,19 @@ export default function LeadsPage() {
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Company</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Company</label>
                   <p>{selectedLead.company || '—'}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Phone</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Phone</label>
                   <p>{selectedLead.phone || '—'}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Budget</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Budget</label>
                   <p>{selectedLead.budget_range}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Service Interest</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Service Interest</label>
                   {(() => {
                     const tag = getServiceTag(selectedLead.service_interest);
                     return tag ? (
@@ -271,11 +271,11 @@ export default function LeadsPage() {
                   })()}
                 </div>
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Region</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Region</label>
                   <p>{getRegionName(selectedLead.region_id)}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-cloud-dancer/60">Status</label>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Status</label>
                   <select
                     value={selectedLead.status}
                     onChange={(e) => updateLeadStatus(selectedLead.id, e.target.value)}
@@ -289,17 +289,17 @@ export default function LeadsPage() {
               </div>
 
               <div className="mb-6">
-                <label className="text-sm text-cloud-dancer/60">Message</label>
-                <p className="mt-1 p-3 bg-slate-ui/30 rounded-md">{selectedLead.message}</p>
+                <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Message</label>
+                <p className="mt-1 p-3 bg-gray-100 dark:bg-slate-ui/30 rounded-md">{selectedLead.message}</p>
               </div>
 
               <div className="mb-6">
-                <label className="text-sm text-cloud-dancer/60 mb-2 block">Notes</label>
+                <label className="text-sm text-gray-500 dark:text-cloud-dancer/60 mb-2 block">Notes</label>
                 <textarea
                   value={noteText}
                   onChange={(e) => setNoteText(e.target.value)}
                   rows={4}
-                  className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-deep-obsidian border border-gray-300 dark:border-slate-ui rounded-md focus:border-warm-sand focus:outline-none resize-none"
                   placeholder="Add notes about this lead..."
                 />
                 <Button
@@ -312,7 +312,7 @@ export default function LeadsPage() {
                 </Button>
               </div>
 
-              <div className="text-sm text-cloud-dancer/60">
+              <div className="text-sm text-gray-500 dark:text-cloud-dancer/60">
                 Created: {new Date(selectedLead.created_at).toLocaleString()}
               </div>
             </Card>

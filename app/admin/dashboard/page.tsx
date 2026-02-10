@@ -69,19 +69,19 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-cloud-dancer/60">Loading...</p>
+        <p className="text-gray-500 dark:text-cloud-dancer/60">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-deep-obsidian py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-deep-obsidian py-12 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
             <h1 className="text-4xl font-unbounded font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-cloud-dancer/60">Welcome back, {user?.full_name || user?.email}</p>
+            <p className="text-gray-500 dark:text-cloud-dancer/60">Welcome back, {user?.full_name || user?.email}</p>
           </div>
           <Button variant="secondary" onClick={handleSignOut}>
             Sign Out
@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
                 <LayoutDashboard size={24} className="text-warm-sand" />
                 <div>
                   <h3 className="font-unbounded font-bold text-sm">Dashboard</h3>
-                  <p className="text-xs text-cloud-dancer/60">Overview & stats</p>
+                  <p className="text-xs text-gray-500 dark:text-cloud-dancer/60">Overview & stats</p>
                 </div>
               </div>
             </Card>
@@ -107,7 +107,7 @@ export default function AdminDashboardPage() {
                 <Users size={24} className="text-warm-sand" />
                 <div>
                   <h3 className="font-unbounded font-bold text-sm">Leads</h3>
-                  <p className="text-xs text-cloud-dancer/60">Manage contacts</p>
+                  <p className="text-xs text-gray-500 dark:text-cloud-dancer/60">Manage contacts</p>
                 </div>
               </div>
             </Card>
@@ -118,7 +118,7 @@ export default function AdminDashboardPage() {
                 <FileText size={24} className="text-warm-sand" />
                 <div>
                   <h3 className="font-unbounded font-bold text-sm">Blog</h3>
-                  <p className="text-xs text-cloud-dancer/60">Manage posts</p>
+                  <p className="text-xs text-gray-500 dark:text-cloud-dancer/60">Manage posts</p>
                 </div>
               </div>
             </Card>
@@ -129,7 +129,7 @@ export default function AdminDashboardPage() {
                 <Settings size={24} className="text-warm-sand" />
                 <div>
                   <h3 className="font-unbounded font-bold text-sm">Settings</h3>
-                  <p className="text-xs text-cloud-dancer/60">Regional config</p>
+                  <p className="text-xs text-gray-500 dark:text-cloud-dancer/60">Regional config</p>
                 </div>
               </div>
             </Card>
@@ -142,25 +142,25 @@ export default function AdminDashboardPage() {
             <div className="text-3xl font-unbounded font-bold text-warm-sand mb-2">
               {leads.length}
             </div>
-            <div className="text-cloud-dancer/60 text-sm">Recent Leads</div>
+            <div className="text-gray-500 dark:text-cloud-dancer/60 text-sm">Recent Leads</div>
           </Card>
           <Card hover={false}>
             <div className="text-3xl font-unbounded font-bold text-warm-sand mb-2">
               {leads.filter(l => l.status === 'new').length}
             </div>
-            <div className="text-cloud-dancer/60 text-sm">New Leads</div>
+            <div className="text-gray-500 dark:text-cloud-dancer/60 text-sm">New Leads</div>
           </Card>
           <Card hover={false}>
             <div className="text-3xl font-unbounded font-bold text-warm-sand mb-2">
               {leads.filter(l => l.status === 'contacted').length}
             </div>
-            <div className="text-cloud-dancer/60 text-sm">Contacted</div>
+            <div className="text-gray-500 dark:text-cloud-dancer/60 text-sm">Contacted</div>
           </Card>
           <Card hover={false}>
             <div className="text-3xl font-unbounded font-bold text-warm-sand mb-2">
               {leads.filter(l => l.status === 'converted').length}
             </div>
-            <div className="text-cloud-dancer/60 text-sm">Converted</div>
+            <div className="text-gray-500 dark:text-cloud-dancer/60 text-sm">Converted</div>
           </Card>
         </div>
 
@@ -170,13 +170,13 @@ export default function AdminDashboardPage() {
           <div className="overflow-x-auto -mx-6 px-6">
             <table className="w-full min-w-[700px]">
               <thead>
-                <tr className="border-b border-slate-ui">
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Name</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
-                  <th className="text-left py-3 px-4 text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
+                <tr className="border-b border-gray-200 dark:border-slate-ui">
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Name</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -184,9 +184,9 @@ export default function AdminDashboardPage() {
                   <tr>
                     <td colSpan={6} className="py-16">
                       <div className="flex flex-col items-center justify-center text-center">
-                        <Inbox size={48} className="text-cloud-dancer/30 mb-4" />
+                        <Inbox size={48} className="text-gray-300 dark:text-cloud-dancer/30 mb-4" />
                         <h3 className="text-lg font-unbounded font-bold mb-2">No Leads Yet</h3>
-                        <p className="text-cloud-dancer/60 text-sm max-w-md">
+                        <p className="text-gray-500 dark:text-cloud-dancer/60 text-sm max-w-md">
                           New leads from the contact form will appear here. Check back soon or share your contact page to start receiving inquiries.
                         </p>
                       </div>
@@ -194,22 +194,22 @@ export default function AdminDashboardPage() {
                   </tr>
                 ) : (
                   leads.map((lead) => (
-                    <tr key={lead.id} className="border-b border-slate-ui/50 hover:bg-slate-ui/30 transition-colors">
+                    <tr key={lead.id} className="border-b border-gray-200 dark:border-slate-ui/50 hover:bg-gray-100 dark:hover:bg-slate-ui/30 transition-colors">
                       <td className="py-4 px-4">{lead.name}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.email}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
-                      <td className="py-4 px-4 text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.email}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
                       <td className="py-4 px-4">
                         <span className={`px-2 py-1 rounded text-xs ${
                           lead.status === 'new' ? 'bg-warm-sand/20 text-warm-sand' :
                           lead.status === 'contacted' ? 'bg-blue-500/20 text-blue-400' :
                           lead.status === 'converted' ? 'bg-green-500/20 text-green-400' :
-                          'bg-slate-ui text-cloud-dancer/60'
+                          'bg-gray-200 dark:bg-slate-ui text-gray-500 dark:text-cloud-dancer/60'
                         }`}>
                           {lead.status}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-cloud-dancer/60 text-sm">
+                      <td className="py-4 px-4 text-gray-500 dark:text-cloud-dancer/60 text-sm">
                         {new Date(lead.created_at).toLocaleDateString()}
                       </td>
                     </tr>
@@ -221,7 +221,7 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Status */}
-        <div className="mt-8 text-center text-cloud-dancer/60 text-sm">
+        <div className="mt-8 text-center text-gray-500 dark:text-cloud-dancer/60 text-sm">
           <p>All systems operational • Phases 1, 2, & 3 complete</p>
         </div>
       </div>
