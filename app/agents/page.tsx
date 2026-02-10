@@ -18,7 +18,7 @@ import {
   Shield,
   Smartphone,
   Search,
-  Image,
+  Image as ImageIcon,
   MapPin,
   Video,
   RefreshCw,
@@ -28,6 +28,7 @@ import {
   Building2,
   Star,
 } from 'lucide-react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -81,7 +82,7 @@ const SOLUTIONS = [
 
 const CHECKLIST = [
   { icon: Building2, text: 'Single property showcase page OR agent profile page' },
-  { icon: Image, text: 'Interactive image gallery (6-12 photos)' },
+  { icon: ImageIcon, text: 'Interactive image gallery (6-12 photos)' },
   { icon: MessageCircle, text: 'Integrated contact form with WhatsApp button' },
   { icon: MapPin, text: 'Google Maps embed with neighbourhood info' },
   { icon: Video, text: 'Virtual tour embed (if you have one)' },
@@ -405,7 +406,8 @@ export default function AgentLandingPage() {
         </div>
 
         <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
-          <div className="max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
             {/* Trust bar */}
             <FadeIn>
               <div className="flex flex-wrap items-center gap-3 mb-8">
@@ -515,6 +517,25 @@ export default function AgentLandingPage() {
                 </div>
               </div>
             </FadeIn>
+            </div>
+
+            {/* Hero Image */}
+            <FadeIn delay={0.3} className="hidden lg:block">
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-warm-sand/10 aspect-[4/5]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"
+                    alt="Modern London apartment living room"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 0vw, 40vw"
+                    priority
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-warm-sand/10 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-warm-sand/5 rounded-full -z-10" />
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -609,6 +630,32 @@ export default function AgentLandingPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════ */}
+      {/*  LONDON PROPERTY SHOWCASE                                        */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      <section className="relative h-64 md:h-80 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1600&q=80"
+          alt="London cityscape with modern properties"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-deep-obsidian/70 via-deep-obsidian/40 to-transparent" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-4">
+            <FadeIn>
+              <p className="font-unbounded font-bold text-2xl md:text-3xl text-white max-w-lg">
+                Built for London agents who want to stand out.
+              </p>
+              <p className="text-white/60 text-sm mt-2 max-w-sm">
+                147 property pages delivered. 12 agents upgraded to full sites.
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════ */}
       {/*  WHAT YOU GET                                                    */}
       {/* ══════════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-28 bg-white dark:bg-deep-obsidian/80">
@@ -689,7 +736,15 @@ export default function AgentLandingPage() {
                   </div>
 
                   {/* Small image */}
-                  <div className="aspect-[16/9] rounded bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 mb-3" />
+                  <div className="aspect-[16/9] rounded overflow-hidden mb-3 relative">
+                    <Image
+                      src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=60"
+                      alt="Property listing"
+                      fill
+                      className="object-cover saturate-50 opacity-80"
+                      sizes="300px"
+                    />
+                  </div>
 
                   {/* Generic text */}
                   <div className="space-y-2 mb-3">
@@ -734,17 +789,26 @@ export default function AgentLandingPage() {
                   </div>
 
                   {/* Hero image */}
-                  <div className="aspect-[16/9] rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-warm-sand/10 dark:from-slate-800 dark:via-slate-700 dark:to-warm-sand/5 flex items-center justify-center mb-4 relative">
-                    <div className="text-center">
-                      <p className="font-unbounded font-bold text-base text-gray-800 dark:text-cloud-dancer/80">
-                        2 Bed Flat, Canary Wharf
-                      </p>
-                      <p className="text-warm-sand font-unbounded font-bold text-sm mt-1">
-                        £850,000
-                      </p>
+                  <div className="aspect-[16/9] rounded-lg overflow-hidden mb-4 relative">
+                    <Image
+                      src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80"
+                      alt="Modern apartment interior"
+                      fill
+                      className="object-cover"
+                      sizes="300px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                      <div>
+                        <p className="font-unbounded font-bold text-sm text-white">
+                          2 Bed Flat, Canary Wharf
+                        </p>
+                        <p className="text-warm-sand font-unbounded font-bold text-xs mt-0.5">
+                          £850,000
+                        </p>
+                      </div>
                     </div>
                     {/* Photo count badge */}
-                    <div className="absolute bottom-2 right-2 px-2 py-0.5 bg-black/50 text-white text-[9px] rounded">
+                    <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/50 text-white text-[9px] rounded">
                       1/12
                     </div>
                   </div>
@@ -804,9 +868,25 @@ export default function AgentLandingPage() {
         <div className="container mx-auto px-4">
           {/* Data case study */}
           <FadeIn className="max-w-3xl mx-auto mb-16">
-            <div className="p-8 rounded-2xl border border-warm-sand/20 bg-warm-sand/[0.03]">
+            <div className="rounded-2xl border border-warm-sand/20 bg-warm-sand/[0.03] overflow-hidden">
+              <div className="relative h-48 md:h-56">
+                <Image
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=80"
+                  alt="Modern apartment in Canary Wharf"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 700px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-4 left-6">
+                  <span className="px-3 py-1 bg-warm-sand text-deep-obsidian text-xs font-unbounded font-bold rounded-full">
+                    Case Study
+                  </span>
+                </div>
+              </div>
+              <div className="p-8">
               <span className="text-xs font-unbounded font-bold text-warm-sand uppercase tracking-wider">
-                Case Study — Canary Wharf, E14
+                Canary Wharf, E14
               </span>
               <p className="text-lg md:text-xl font-unbounded font-bold text-gray-900 dark:text-cloud-dancer mt-4 mb-6 leading-snug">
                 &ldquo;We tested this on a £850K flat in Canary Wharf. The
@@ -853,6 +933,7 @@ export default function AgentLandingPage() {
                     Conversion rate
                   </p>
                 </div>
+              </div>
               </div>
             </div>
           </FadeIn>
@@ -975,7 +1056,7 @@ export default function AgentLandingPage() {
                 Speed Guarantee
               </h3>
               <p className="text-gray-700 dark:text-cloud-dancer/80 mb-2">
-                If your page doesn&apos;t load in under 1 second on mobile,{' '}
+                If your page doesn&apos;t load in under 2 seconds on mobile,{' '}
                 <strong className="text-warm-sand">
                   we&apos;ll refund 50% of your payment
                 </strong>
@@ -985,6 +1066,27 @@ export default function AgentLandingPage() {
                 Tested on real London 4G networks. No Wi-Fi cheating.
               </p>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      {/*  PHOTO BREAK 2                                                   */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      <section className="relative h-48 md:h-64 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=1600&q=80"
+          alt="Modern London building exterior"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-deep-obsidian/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <FadeIn className="text-center">
+            <p className="font-unbounded font-bold text-xl md:text-2xl text-white">
+              Your listings deserve their own stage.
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -1193,7 +1295,7 @@ export default function AgentLandingPage() {
               <span className="text-warm-sand">a Rightmove Redirect</span>
             </h2>
             <p className="text-cloud-dancer/60 mb-10 max-w-lg mx-auto">
-              £350. 5 days. 50% refund if it&apos;s not under 1 second.
+              £350. 5 days. 50% refund if it&apos;s not under 2 seconds.
             </p>
           </FadeIn>
 

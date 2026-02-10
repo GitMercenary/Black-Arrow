@@ -20,6 +20,7 @@ import {
   Send,
   Zap,
 } from 'lucide-react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -251,7 +252,8 @@ export default function CafeLandingPage() {
         </div>
 
         <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
-          <div className="max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
             {/* Urgency badge */}
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 rounded-full mb-6">
@@ -351,6 +353,25 @@ export default function CafeLandingPage() {
                 </div>
               </div>
             </FadeIn>
+            </div>
+
+            {/* Hero Image */}
+            <FadeIn delay={0.3} className="hidden lg:block">
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-warm-sand/10 aspect-[4/5]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80"
+                    alt="Cozy London cafe interior with warm lighting"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 0vw, 40vw"
+                    priority
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-warm-sand/10 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-warm-sand/5 rounded-full -z-10" />
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -387,6 +408,32 @@ export default function CafeLandingPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      {/*  PHOTO BREAK                                                     */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      <section className="relative h-64 md:h-80 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1600&q=80"
+          alt="Cafe counter with pastries and coffee"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-deep-obsidian/70 via-deep-obsidian/40 to-transparent" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-4">
+            <FadeIn>
+              <p className="font-unbounded font-bold text-2xl md:text-3xl text-white max-w-md">
+                Your cafe deserves more than an Instagram bio.
+              </p>
+              <p className="text-white/60 text-sm mt-2 max-w-sm">
+                Join 12 London cafes who launched this month.
+              </p>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -485,6 +532,33 @@ export default function CafeLandingPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════ */}
+      {/*  PHOTO STRIP                                                     */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      <section className="py-8 bg-white dark:bg-deep-obsidian">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {[
+              { src: 'photo-1559305616-3f99cd43e353', alt: 'London cafe storefront' },
+              { src: 'photo-1511920170033-f8396924c348', alt: 'Coffee being prepared' },
+              { src: 'photo-1453614512568-c4024d13c247', alt: 'Cafe interior seating' },
+            ].map((img) => (
+              <FadeIn key={img.src}>
+                <div className="aspect-[4/3] rounded-xl overflow-hidden relative">
+                  <Image
+                    src={`https://images.unsplash.com/${img.src}?w=500&q=80`}
+                    alt={img.alt}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 33vw, 300px"
+                  />
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════ */}
       {/*  BEFORE / AFTER                                                  */}
       {/* ══════════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white dark:from-deep-obsidian/80 dark:to-deep-obsidian">
@@ -546,11 +620,23 @@ export default function CafeLandingPage() {
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-1">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="aspect-square rounded bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30"
-                      />
+                    {[
+                      'photo-1509042239860-f550ce710b93',
+                      'photo-1555507036-ab1f4038024a',
+                      'photo-1514432324607-a09d9b4aefda',
+                      'photo-1495474472287-4d71bcdd2085',
+                      'photo-1464979681340-bdd28a61699e',
+                      'photo-1414235077428-338989a2e8c0',
+                    ].map((id, i) => (
+                      <div key={i} className="aspect-square rounded overflow-hidden relative">
+                        <Image
+                          src={`https://images.unsplash.com/${id}?w=150&q=60`}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="80px"
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -577,14 +663,23 @@ export default function CafeLandingPage() {
                   </div>
 
                   {/* Hero area */}
-                  <div className="aspect-[16/7] rounded-lg bg-gradient-to-br from-amber-100 via-orange-50 to-amber-50 dark:from-amber-900/20 dark:via-orange-900/10 dark:to-amber-900/20 flex items-center justify-center mb-4">
-                    <div className="text-center">
-                      <p className="font-unbounded font-bold text-lg text-gray-800 dark:text-cloud-dancer/80">
-                        Specialty Coffee
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-cloud-dancer/40 mt-1">
-                        Since 2019 &bull; Shoreditch, London
-                      </p>
+                  <div className="aspect-[16/7] rounded-lg overflow-hidden mb-4 relative">
+                    <Image
+                      src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
+                      alt="Specialty coffee latte art"
+                      fill
+                      className="object-cover"
+                      sizes="300px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
+                      <div>
+                        <p className="font-unbounded font-bold text-sm text-white">
+                          Specialty Coffee
+                        </p>
+                        <p className="text-[10px] text-white/70">
+                          Since 2019 &bull; Shoreditch, London
+                        </p>
+                      </div>
                     </div>
                   </div>
 
@@ -633,8 +728,17 @@ export default function CafeLandingPage() {
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/*  TESTIMONIAL                                                     */}
       {/* ══════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-white dark:bg-deep-obsidian/90">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 bg-white dark:bg-deep-obsidian/90 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
+          <Image
+            src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=40"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <FadeIn className="max-w-2xl mx-auto text-center">
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -689,6 +793,27 @@ export default function CafeLandingPage() {
                 we refund every penny. No questions, no hassle.
               </p>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      {/*  PHOTO BREAK 2                                                   */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      <section className="relative h-48 md:h-64 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=80"
+          alt="Barista pouring latte art"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-deep-obsidian/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <FadeIn className="text-center">
+            <p className="font-unbounded font-bold text-xl md:text-2xl text-white">
+              Ready to get found on Google?
+            </p>
           </FadeIn>
         </div>
       </section>
