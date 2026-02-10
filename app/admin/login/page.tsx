@@ -11,7 +11,9 @@ export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -61,6 +63,37 @@ export default function AdminLoginPage() {
     }
   }
 
+  async function handleForgotPassword() {
+    if (!email.trim()) {
+      setError('Please enter your email first, then click Forgot Password.');
+      return;
+    }
+
+    setResetLoading(true);
+    setError('');
+    setMessage('');
+
+    try {
+      const supabase = createClient();
+
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/admin/reset-password`,
+      });
+
+      if (resetError) {
+        setError(resetError.message);
+        return;
+      }
+
+      setMessage('Password reset email sent! Check your inbox.');
+    } catch (err) {
+      setError('An unexpected error occurred.');
+      console.error(err);
+    } finally {
+      setResetLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-deep-obsidian px-4">
       <div className="w-full max-w-md">
@@ -105,6 +138,12 @@ export default function AdminLoginPage() {
               </div>
             )}
 
+            {message && (
+              <div className="bg-green-500/10 border border-green-500/50 rounded-md p-3 text-green-400 text-sm">
+                {message}
+              </div>
+            )}
+
             <Button
               type="submit"
               variant="primary"
@@ -113,6 +152,15 @@ export default function AdminLoginPage() {
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
+
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              disabled={resetLoading}
+              className="w-full text-center text-sm text-cloud-dancer/50 hover:text-warm-sand transition-colors mt-2"
+            >
+              {resetLoading ? 'Sending reset email...' : 'Forgot Password?'}
+            </button>
           </form>
         </Card>
       </div>
