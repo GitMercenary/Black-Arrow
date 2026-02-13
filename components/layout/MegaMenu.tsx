@@ -8,11 +8,11 @@ import Button from '../ui/Button';
 
 const SERVICES = [
   {
-    icon: ShoppingCart,
-    title: 'E-Commerce Development',
-    description: 'Headless commerce platforms with AI recommendations',
-    href: '/services/ecommerce',
-    stat: '₹2.3Cr revenue unlocked',
+    icon: Code,
+    title: 'Website Development',
+    description: 'Landing pages, business sites & web apps',
+    href: '/services/website-development',
+    stat: 'From £350 / ₹29,999',
   },
   {
     icon: TrendingUp,
@@ -29,18 +29,18 @@ const SERVICES = [
     stat: '80 hours/month saved',
   },
   {
-    icon: Search,
-    title: 'Technical SEO',
-    description: 'Core Web Vitals & structured data',
-    href: '/services/seo',
-    stat: 'Page 3 → Position 2',
+    icon: ShoppingCart,
+    title: 'E-Commerce Development',
+    description: 'Headless commerce platforms with AI recommendations',
+    href: '/services/ecommerce',
+    stat: '₹2.3Cr revenue unlocked',
   },
   {
-    icon: Code,
-    title: 'Website Development',
-    description: 'Landing pages, business sites & web apps',
-    href: '/services/website-development',
-    stat: 'From £350 / ₹29,999',
+    icon: Search,
+    title: 'Technical SEO, GEO & AEO',
+    description: 'Core Web Vitals, structured data & AI search',
+    href: '/services/seo',
+    stat: 'Page 3 → Position 2',
   },
 ];
 
@@ -62,10 +62,12 @@ const QUICK_LINKS = [
 interface MegaMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   onOpenAIAudit?: () => void;
 }
 
-export default function MegaMenu({ isOpen, onClose, onOpenAIAudit }: MegaMenuProps) {
+export default function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave, onOpenAIAudit }: MegaMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -97,11 +99,11 @@ export default function MegaMenu({ isOpen, onClose, onOpenAIAudit }: MegaMenuPro
   return (
     <div
       ref={menuRef}
-      onMouseEnter={(e) => e.stopPropagation()}
-      className="absolute top-full left-0 right-0 mt-2 bg-white/90 dark:bg-deep-obsidian/95 backdrop-blur-xl border-t-2 border-warm-sand shadow-2xl z-90 animate-in fade-in slide-in-from-top-2 duration-200"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="absolute top-full left-0 right-0 bg-white/95 dark:bg-deep-obsidian backdrop-blur-xl border-t-2 border-warm-sand shadow-2xl z-[90] animate-scale-in"
       role="menu"
       aria-label="Services mega menu"
-      style={{ backdropFilter: 'blur(24px) saturate(180%)' }}
     >
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -220,10 +222,10 @@ export default function MegaMenu({ isOpen, onClose, onOpenAIAudit }: MegaMenuPro
             {/* Featured Stat */}
             <div className="text-center pt-4 border-t border-gray-200 dark:border-neutral-700/50">
               <div className="text-2xl font-unbounded font-bold text-warm-sand mb-1">
-                ₹50Cr+
+                50+
               </div>
               <div className="text-xs text-deep-obsidian dark:text-cloud-dancer/60">
-                Revenue Generated for Clients
+                Projects Delivered
               </div>
             </div>
           </div>

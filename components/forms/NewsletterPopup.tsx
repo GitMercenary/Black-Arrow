@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import { X, Mail, Check } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils/cn';
+import { usePopupManager } from '@/lib/contexts/PopupManagerContext';
 import Button from '../ui/Button';
 import FieldError from '../ui/FieldError';
 
@@ -14,6 +15,7 @@ interface NewsletterPopupProps {
 
 export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupProps) {
   const pathname = usePathname();
+  const { requestShow, dismiss } = usePopupManager();
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,25 +29,38 @@ export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupPr
     }
 
     // Check if user has already dismissed or subscribed
-    const dismissed = localStorage.getItem('newsletter_dismissed');
-    const subscribed = localStorage.getItem('newsletter_subscribed');
+    let dismissed: string | null = null;
+    let subscribed: string | null = null;
+    try {
+      dismissed = localStorage.getItem('newsletter_dismissed');
+      subscribed = localStorage.getItem('newsletter_subscribed');
+    } catch {
+      return; // Fail gracefully if localStorage unavailable
+    }
 
     if (dismissed || subscribed) {
       return;
     }
 
-    // Show popup after delay
+    // Show popup after delay (only if popup manager allows)
     const timer = setTimeout(() => {
-      setIsVisible(true);
+      if (requestShow('newsletter')) {
+        setIsVisible(true);
+      }
     }, delaySeconds * 1000);
 
     return () => clearTimeout(timer);
-  }, [delaySeconds, pathname]);
+  }, [delaySeconds, pathname, requestShow]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsVisible(false);
-    localStorage.setItem('newsletter_dismissed', 'true');
-  };
+    dismiss('newsletter');
+    try {
+      localStorage.setItem('newsletter_dismissed', 'true');
+    } catch {
+      // Silently fail
+    }
+  }, [dismiss]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,11 +79,13 @@ export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupPr
       const supabase = createClient();
 
       // Check if email already exists
-      const { data: existing } = await supabase
+      const { data: existing, error: checkError } = await supabase
         .from('newsletter_subscriptions')
         .select('email')
         .eq('email', email)
-        .single();
+        .maybeSingle();
+
+      if (checkError) throw checkError;
 
       if (existing) {
         setError('This email is already subscribed');
@@ -92,11 +109,16 @@ export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupPr
       }
 
       setSuccess(true);
-      localStorage.setItem('newsletter_subscribed', 'true');
+      try {
+        localStorage.setItem('newsletter_subscribed', 'true');
+      } catch {
+        // Silently fail
+      }
 
       // Close popup after 3 seconds
       setTimeout(() => {
         setIsVisible(false);
+        dismiss('newsletter');
       }, 3000);
     } catch (err) {
       console.error('Newsletter subscription error:', err);
@@ -106,11 +128,15 @@ export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupPr
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      handleClose();
-    }
-  };
+  // Document-level Escape key handler (works regardless of focus)
+  useEffect(() => {
+    if (!isVisible) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isVisible, handleClose]);
 
   if (!isVisible) return null;
 
@@ -118,12 +144,9 @@ export default function NewsletterPopup({ delaySeconds = 10 }: NewsletterPopupPr
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] animate-in fade-in duration-300"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
         onClick={handleClose}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={-1}
-        aria-label="Close newsletter popup"
+        aria-hidden="true"
       />
 
       {/* Popup */}

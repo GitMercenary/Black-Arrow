@@ -50,7 +50,7 @@ export default function AdsPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 overflow-hidden">
+      <Section className="relative pt-40 pb-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <OptimizedImage
@@ -77,7 +77,7 @@ export default function AdsPage() {
             </h1>
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
-            <p className="text-xl text-cloud-dancer/80 leading-relaxed max-w-3xl">
+            <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 leading-relaxed max-w-3xl">
               Google Ads, Meta Ads, and LinkedIn campaigns engineered for B2B
               and luxury retail. We don&apos;t guess - we optimize based on data.
             </p>
@@ -92,10 +92,10 @@ export default function AdsPage() {
             <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-4">
               42% Lower CAC in 90 Days
             </h2>
-            <p className="text-lg text-cloud-dancer/80 mb-2">
+            <p className="text-lg text-gray-600 dark:text-cloud-dancer/80 mb-2">
               Real estate developer, Dubai
             </p>
-            <p className="text-cloud-dancer/70 leading-relaxed">
+            <p className="text-gray-500 dark:text-cloud-dancer/70 leading-relaxed">
               Previous agency was burning budget on broad targeting. We rebuilt
               their campaigns with intent-based audiences and conversion-optimized
               landing pages that cut acquisition costs nearly in half.
@@ -128,7 +128,7 @@ export default function AdsPage() {
             <Card key={feature.title} hover={false} className="p-6">
               <div className="text-warm-sand mb-4">{feature.icon}</div>
               <h3 className="text-lg font-unbounded font-bold mb-2">{feature.title}</h3>
-              <p className="text-cloud-dancer/70 text-sm">{feature.description}</p>
+              <p className="text-gray-500 dark:text-cloud-dancer/70 text-sm">{feature.description}</p>
             </Card>
           ))}
         </div>
@@ -144,7 +144,7 @@ export default function AdsPage() {
             {['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'TikTok Ads', 'Google Analytics 4', 'Looker Studio', 'HubSpot', 'Salesforce'].map((platform) => (
               <span
                 key={platform}
-                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm"
+                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm text-cloud-dancer"
               >
                 {platform}
               </span>
@@ -158,7 +158,7 @@ export default function AdsPage() {
         <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-6">
           Stop Wasting Ad Spend
         </h2>
-        <p className="text-xl text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
           Get a free audit of your current campaigns. We&apos;ll show you exactly
           where your budget is leaking.
         </p>

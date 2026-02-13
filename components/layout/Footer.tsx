@@ -27,8 +27,8 @@ export default function Footer() {
             <h4 className="font-unbounded font-bold text-sm mb-4 text-gray-900 dark:text-cloud-dancer">Services</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/services/ecommerce" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
-                  E-Commerce Development
+                <Link href="/services/website-development" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                  Website Development
                 </Link>
               </li>
               <li>
@@ -42,13 +42,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/seo" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
-                  Technical SEO
+                <Link href="/services/ecommerce" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                  E-Commerce Development
                 </Link>
               </li>
               <li>
-                <Link href="/services/website-development" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
-                  Website Development
+                <Link href="/services/seo" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                  Technical SEO, GEO & AEO
                 </Link>
               </li>
             </ul>
@@ -58,6 +58,11 @@ export default function Footer() {
           <div>
             <h4 className="font-unbounded font-bold text-sm mb-4 text-gray-900 dark:text-cloud-dancer">Company</h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/about" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
+                  About
+                </Link>
+              </li>
               <li>
                 <Link href="/case-studies" className="text-gray-700 dark:text-cloud-dancer/60 hover:text-warm-sand dark:hover:text-warm-sand transition-colors">
                   Case Studies

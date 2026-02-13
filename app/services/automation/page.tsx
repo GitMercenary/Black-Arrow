@@ -10,6 +10,7 @@ import OptimizedImage from '@/components/ui/OptimizedImage';
 import { IMAGES } from '@/lib/constants/images';
 import FadeIn from '@/components/animations/FadeIn';
 import { useAIAudit } from '@/lib/contexts/AIAuditContext';
+import AIToolLogos from '@/components/ui/AIToolLogos';
 
 const FEATURES = [
   {
@@ -50,7 +51,7 @@ export default function AutomationPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 bg-pattern-circuit overflow-hidden">
+      <Section className="relative pt-40 pb-12 bg-pattern-circuit overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <OptimizedImage
@@ -77,7 +78,7 @@ export default function AutomationPage() {
             </h1>
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
-            <p className="text-xl text-cloud-dancer/80 leading-relaxed max-w-3xl">
+            <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 leading-relaxed max-w-3xl">
             Workflow automation, AI chatbots, and CRM integration that frees
             your team for strategy. We automate the repetitive so you can focus on growth.
           </p>
@@ -92,10 +93,10 @@ export default function AutomationPage() {
             <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-4">
               80 Hours/Month Saved
             </h2>
-            <p className="text-lg text-cloud-dancer/80 mb-2">
+            <p className="text-lg text-gray-600 dark:text-cloud-dancer/80 mb-2">
               Healthcare provider, Bangalore
             </p>
-            <p className="text-cloud-dancer/70 leading-relaxed">
+            <p className="text-gray-500 dark:text-cloud-dancer/70 leading-relaxed">
               Patient follow-ups, appointment reminders, and insurance verification
               were drowning the admin team. We built automated workflows that
               handle it all, freeing staff for patient care.
@@ -128,7 +129,7 @@ export default function AutomationPage() {
             <Card key={feature.title} hover={false} className="p-6">
               <div className="text-warm-sand mb-4">{feature.icon}</div>
               <h3 className="text-lg font-unbounded font-bold mb-2">{feature.title}</h3>
-              <p className="text-cloud-dancer/70 text-sm">{feature.description}</p>
+              <p className="text-gray-500 dark:text-cloud-dancer/70 text-sm">{feature.description}</p>
             </Card>
           ))}
         </div>
@@ -144,7 +145,7 @@ export default function AutomationPage() {
             {['Zapier', 'Make', 'n8n', 'OpenAI', 'HubSpot', 'Salesforce', 'Intercom', 'Twilio'].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm"
+                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm text-cloud-dancer"
               >
                 {tool}
               </span>
@@ -153,12 +154,15 @@ export default function AutomationPage() {
         </div>
       </Section>
 
+      {/* AI Tool Logos */}
+      <AIToolLogos />
+
       {/* CTA */}
       <Section className="text-center">
         <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-6">
           Ready to Automate?
         </h2>
-        <p className="text-xl text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
           Get a free workflow audit. We&apos;ll identify your biggest time sinks
           and show you how to automate them.
         </p>

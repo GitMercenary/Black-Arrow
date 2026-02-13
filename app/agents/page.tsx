@@ -281,12 +281,22 @@ function SpeedBars() {
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0 });
+  const [expired, setExpired] = useState(false);
 
   useEffect(() => {
     const target = new Date('2026-02-28T23:59:59').getTime();
 
+    if (Date.now() > target) {
+      setExpired(true);
+      return;
+    }
+
     function update() {
       const diff = Math.max(0, target - Date.now());
+      if (diff === 0) {
+        setExpired(true);
+        return;
+      }
       setTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -298,6 +308,8 @@ function Countdown() {
     const interval = setInterval(update, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  if (expired) return null;
 
   return (
     <div className="flex items-center justify-center gap-4">
@@ -357,8 +369,14 @@ export default function AgentLandingPage() {
         .eq('code', 'UK')
         .single();
 
+      if (!region) {
+        setFormError('Configuration error. Please WhatsApp us instead.');
+        setSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase.from('leads').insert({
-        region_id: region?.id,
+        region_id: region.id,
         name: form.name,
         email: form.email,
         phone: form.phone || null,
@@ -405,7 +423,7 @@ export default function AgentLandingPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
+        <div className="container mx-auto px-4 pt-40 pb-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
             {/* Trust bar */}
@@ -506,7 +524,7 @@ export default function AgentLandingPage() {
                       </span>
                     ))}
                   </div>
-                  <span>147 property pages delivered since 2024</span>
+                  <span>50+ property pages delivered since 2024</span>
                 </div>
                 <span className="hidden sm:block text-gray-300 dark:text-cloud-dancer/20">
                   |
@@ -648,7 +666,7 @@ export default function AgentLandingPage() {
                 Built for London agents who want to stand out.
               </p>
               <p className="text-white/60 text-sm mt-2 max-w-sm">
-                147 property pages delivered. 12 agents upgraded to full sites.
+                50+ property pages delivered. 12 agents upgraded to full sites.
               </p>
             </FadeIn>
           </div>

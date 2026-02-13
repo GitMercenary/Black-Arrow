@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { useModalManager } from './ModalManagerContext';
 
 interface AIAuditContextType {
   isOpen: boolean;
@@ -12,9 +13,16 @@ const AIAuditContext = createContext<AIAuditContextType | undefined>(undefined);
 
 export function AIAuditProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { registerModal, unregisterModal } = useModalManager();
 
-  const openAudit = () => setIsOpen(true);
-  const closeAudit = () => setIsOpen(false);
+  const openAudit = () => {
+    registerModal('ai-audit');
+    setIsOpen(true);
+  };
+  const closeAudit = () => {
+    setIsOpen(false);
+    unregisterModal('ai-audit');
+  };
 
   return (
     <AIAuditContext.Provider value={{ isOpen, openAudit, closeAudit }}>

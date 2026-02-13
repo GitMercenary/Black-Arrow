@@ -1,37 +1,54 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import { X, ArrowRight } from 'lucide-react';
 import { useAIAudit } from '@/lib/contexts/AIAuditContext';
+import { useModalManager } from '@/lib/contexts/ModalManagerContext';
 import Button from './ui/Button';
 
 const EXIT_INTENT_KEY = 'bat-exit-intent-shown';
 const EXIT_INTENT_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours
 
 export default function ExitIntentPopup() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
-  const [hasShown, setHasShown] = useState(true); // Start as true to prevent initial show
+  const hasShownRef = useRef(true); // Use ref to avoid stale closure
   const { openAudit } = useAIAudit();
+  const { isModalOpen, registerModal, unregisterModal } = useModalManager();
+
+  // Track isModalOpen via ref so the mouseleave handler always has current value
+  const isModalOpenRef = useRef(isModalOpen);
+  useEffect(() => { isModalOpenRef.current = isModalOpen; }, [isModalOpen]);
 
   useEffect(() => {
     // Check if we've shown the popup recently
-    const lastShown = localStorage.getItem(EXIT_INTENT_KEY);
-    const now = Date.now();
+    let lastShown: string | null = null;
+    try {
+      lastShown = localStorage.getItem(EXIT_INTENT_KEY);
+    } catch {
+      return; // Fail gracefully if localStorage unavailable
+    }
 
-    if (lastShown && now - parseInt(lastShown) < EXIT_INTENT_COOLDOWN) {
-      setHasShown(true);
+    if (lastShown && Date.now() - parseInt(lastShown, 10) < EXIT_INTENT_COOLDOWN) {
+      hasShownRef.current = true;
       return;
     }
 
-    setHasShown(false);
+    hasShownRef.current = false;
 
     // Exit intent detection
     const handleMouseLeave = (e: MouseEvent) => {
-      // Only trigger if mouse leaves from the top (y < 10) and moving upward
-      if (e.clientY < 10 && e.movementY < 0 && !hasShown) {
+      // Only trigger if mouse leaves from the top (y < 10), moving upward, and no other modal is open
+      if (e.clientY < 10 && e.movementY < 0 && !hasShownRef.current && !isModalOpenRef.current) {
+        registerModal('exit-intent');
         setIsVisible(true);
-        setHasShown(true);
-        localStorage.setItem(EXIT_INTENT_KEY, now.toString());
+        hasShownRef.current = true;
+        try {
+          localStorage.setItem(EXIT_INTENT_KEY, Date.now().toString());
+        } catch {
+          // Silently fail
+        }
       }
     };
 
@@ -44,21 +61,46 @@ export default function ExitIntentPopup() {
       clearTimeout(timeout);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [hasShown]);
+  }, [pathname, registerModal]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsVisible(false);
-  };
+    unregisterModal('exit-intent');
+  }, [unregisterModal]);
+
+  // Escape key handler
+  useEffect(() => {
+    if (!isVisible) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isVisible, handleClose]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
+  }, [isVisible]);
 
   const handleCTA = () => {
     setIsVisible(false);
+    unregisterModal('exit-intent');
     openAudit();
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 animate-in fade-in duration-200">
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="exit-intent-title"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -66,7 +108,7 @@ export default function ExitIntentPopup() {
       />
 
       {/* Modal */}
-      <div className="relative max-w-lg w-full bg-white dark:bg-deep-obsidian border-2 border-warm-sand rounded-lg shadow-2xl p-8 animate-in zoom-in-95 duration-300">
+      <div className="relative max-w-lg w-full bg-white dark:bg-deep-obsidian border-2 border-warm-sand rounded-lg shadow-2xl p-8 animate-scale-in">
         {/* Close Button */}
         <button
           onClick={handleClose}
@@ -82,7 +124,7 @@ export default function ExitIntentPopup() {
           <div className="mb-4 text-6xl">⚡</div>
 
           {/* Headline */}
-          <h2 className="font-unbounded font-bold text-2xl mb-4 text-gray-900 dark:text-cloud-dancer">
+          <h2 id="exit-intent-title" className="font-unbounded font-bold text-2xl mb-4 text-gray-900 dark:text-cloud-dancer">
             Wait! Before You Go...
           </h2>
 

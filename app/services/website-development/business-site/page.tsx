@@ -8,7 +8,7 @@ import ProjectShowcase from '@/components/ui/ProjectShowcase';
 import { useWebDevQuote } from '@/lib/contexts/WebDevQuoteContext';
 import { IMAGES } from '@/lib/constants/images';
 import {
-  Briefcase, ArrowRight, CheckCircle2, Zap, Clock,
+  Briefcase, ArrowRight, ArrowLeft, CheckCircle2, Zap, Clock,
   Globe, Search, BarChart3, Shield, Star,
   FileCode, Palette, Rocket, Users, MessageSquare,
   Layers, PenTool, Monitor
@@ -149,8 +149,22 @@ export default function BusinessSitePage() {
 
   return (
     <main className="pb-24">
+      {/* Breadcrumb */}
+      <div className="pt-28 pb-0 max-w-7xl mx-auto px-4 sm:px-6">
+        <nav className="flex items-center gap-2 text-sm text-gray-500 dark:text-cloud-dancer/60" aria-label="Breadcrumb">
+          <Link href="/services/website-development" className="flex items-center gap-1 hover:text-warm-sand transition-colors" aria-label="Back to Website Development">
+            <ArrowLeft size={16} />
+          </Link>
+          <Link href="/services" className="hidden sm:inline hover:text-warm-sand transition-colors">Services</Link>
+          <span className="hidden sm:inline">/</span>
+          <Link href="/services/website-development" className="hover:text-warm-sand transition-colors">Website Development</Link>
+          <span>/</span>
+          <span className="text-gray-900 dark:text-cloud-dancer font-medium">Business Website</span>
+        </nav>
+      </div>
+
       {/* Hero Section with Image */}
-      <Section className="pt-32 pb-16 bg-gradient-to-b from-warm-sand/10 to-transparent">
+      <Section className="pt-8 pb-16 bg-gradient-to-b from-warm-sand/10 to-transparent">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeIn direction="up" duration={0.6}>
@@ -404,7 +418,7 @@ export default function BusinessSitePage() {
           </FadeIn>
         </div>
 
-        <ProjectShowcase showFilters={false} maxItems={4} />
+        <ProjectShowcase showFilters={false} maxItems={4} defaultFilter="business-site" />
       </Section>
 
       {/* Final CTA */}

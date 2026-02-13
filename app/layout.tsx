@@ -6,6 +6,8 @@ import { AIAuditProvider } from "@/lib/contexts/AIAuditContext";
 import { ThemeProvider } from "@/lib/contexts/ThemeContext";
 import { ServiceIntentProvider } from "@/lib/contexts/ServiceIntentContext";
 import { WebDevQuoteProvider } from "@/lib/contexts/WebDevQuoteContext";
+import { PopupManagerProvider } from "@/lib/contexts/PopupManagerContext";
+import { ModalManagerProvider } from "@/lib/contexts/ModalManagerContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NewsletterPopup from "@/components/forms/NewsletterPopup";
@@ -54,7 +56,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "Black Arrow Technologies | AI-Native Marketing & Web Development",
-  description: "We don't do pretty websites. We engineer digital sales machines for UK, UAE, and India markets.",
+  description: "We don't just do pretty websites. We engineer digital sales machines — powered by AI, built by developers who understand your market.",
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -70,7 +72,7 @@ export const metadata: Metadata = {
     url: 'https://blackarrowtechnologies.com',
     siteName: 'Black Arrow Technologies',
     title: 'Black Arrow Technologies | AI-Native Marketing & Web Development',
-    description: 'We don\'t do pretty websites. We engineer digital sales machines for UK, UAE, and India markets.',
+    description: 'We don\'t just do pretty websites. We engineer digital sales machines — powered by AI, built by developers who understand your market.',
     images: [
       {
         url: '/og-image.png',
@@ -83,7 +85,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Black Arrow Technologies | AI-Native Marketing & Web Development',
-    description: 'We don\'t do pretty websites. We engineer digital sales machines for UK, UAE, and India markets.',
+    description: 'We don\'t just do pretty websites. We engineer digital sales machines — powered by AI, built by developers who understand your market.',
     images: ['/og-image.png'],
   },
 };
@@ -92,9 +94,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  minimumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -105,6 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`
         ${unbounded.variable}
         ${hankenGrotesk.variable}
@@ -117,24 +118,30 @@ export default function RootLayout({
         <ViewportFix />
         <ThemeProvider>
           <RegionProvider>
-            <ServiceIntentProvider>
-              <AIAuditProvider>
-                <WebDevQuoteProvider>
-                  <Header />
-                  {children}
-                  <Footer />
-                  <StickyIntentReminder />
-                  <StickyServiceBar />
-                  <NewsletterPopup delaySeconds={10} />
-                  <Chatbot />
-                  <AIAuditPopupWrapper />
-                  <WebDevQuotePopup />
-                  <ExitIntentPopup />
-                  <MicrosoftClarity />
-                  <CookieConsent />
-                </WebDevQuoteProvider>
-              </AIAuditProvider>
-            </ServiceIntentProvider>
+            <PopupManagerProvider>
+              <ModalManagerProvider>
+                <ServiceIntentProvider>
+                  <AIAuditProvider>
+                    <WebDevQuoteProvider>
+                      <Header />
+                      {children}
+                      <Footer />
+                      <StickyIntentReminder />
+                      <StickyServiceBar />
+                      {/* Popup Manager group: newsletter + cookie (mutual exclusion) */}
+                      <NewsletterPopup delaySeconds={10} />
+                      <CookieConsent />
+                      {/* Modal Manager group: user-triggered + exit intent */}
+                      <Chatbot />
+                      <AIAuditPopupWrapper />
+                      <WebDevQuotePopup />
+                      <ExitIntentPopup />
+                      <MicrosoftClarity />
+                    </WebDevQuoteProvider>
+                  </AIAuditProvider>
+                </ServiceIntentProvider>
+              </ModalManagerProvider>
+            </PopupManagerProvider>
           </RegionProvider>
         </ThemeProvider>
       </body>

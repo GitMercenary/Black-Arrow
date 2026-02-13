@@ -27,9 +27,10 @@ interface BentoCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   description: string;
   hover?: boolean;
+  children?: React.ReactNode;
 }
 
-export function BentoCard({ icon, title, description, hover = true, className, ...props }: BentoCardProps) {
+export function BentoCard({ icon, title, description, hover = true, className, children, ...props }: BentoCardProps) {
   return (
     <Card hover={hover} className={className} {...props} tabIndex={0} role="button">
       {icon && (
@@ -39,6 +40,7 @@ export function BentoCard({ icon, title, description, hover = true, className, .
       )}
       <h3 className="font-unbounded text-xl sm:text-2xl mb-3 sm:mb-4 text-gray-900 dark:text-cloud-dancer">{title}</h3>
       <p className="font-hanken text-gray-700 dark:text-gray-200 leading-relaxed text-base" style={{lineHeight: '1.75'}}>{description}</p>
+      {children}
     </Card>
   );
 }

@@ -12,63 +12,67 @@ import { IMAGES } from '@/lib/constants/images';
 const CASE_STUDIES = [
   {
     icon: <ShoppingCart size={24} />,
-    industry: 'Luxury E-Commerce',
-    region: 'UAE',
-    title: '₹2.3Cr Revenue in 6 Months',
-    description: 'Legacy Shopify store transformed into a headless Next.js platform with AI recommendations.',
-    image: IMAGES.caseStudies.luxuryWatch,
+    industry: 'Automotive E-commerce',
+    region: 'USA',
+    title: '9,000+ Parts Catalogued & Online in 4 Weeks',
+    description: 'Built a WooCommerce-powered parts finder with year/make/model lookup, connecting 200+ warehouses across all 50 US states. Transformed manual phone-order workflow into a fully searchable online catalogue.',
+    image: IMAGES.caseStudies.autoparts,
     metrics: [
-      { value: '+35%', label: 'Conversion Rate' },
-      { value: '+22%', label: 'Average Order Value' },
-      { value: '-60%', label: 'Page Load Time' },
+      { value: '9,000+', label: 'Parts Online' },
+      { value: '200+', label: 'Warehouses' },
+      { value: '<2s', label: 'Load Time' },
     ],
-    quote: 'Black Arrow didn\'t just build us a website. They built us a revenue machine.',
-    client: 'CEO, Dubai Watch Retailer',
+    quote: 'They took our entire catalogue and built a search system that actually works. Customers find what they need in seconds now.',
+    client: 'Founder, Astern Autoparts',
+    url: 'https://asternautoparts.com',
+  },
+  {
+    icon: <Search size={24} />,
+    industry: 'Interior Design',
+    region: 'India',
+    title: 'Portfolio-First Design That Converts Visitors to Consultations',
+    description: 'Elegant portfolio website for Bangalore\'s premier interior design studio. Showcases luxury residential and commercial projects with a visual-first approach that drives consultation bookings.',
+    image: IMAGES.caseStudies.interiorDesign,
+    metrics: [
+      { value: '50+', label: 'Projects Showcased' },
+      { value: '2014', label: 'Est. Year' },
+      { value: '5+', label: 'Design Categories' },
+    ],
+    quote: 'Our portfolio finally does our work justice. The site has become our best sales tool for new consultations.',
+    client: 'Director, Marakk Design Atelier',
+    url: 'https://marakkdesignatelier.com',
   },
   {
     icon: <TrendingUp size={24} />,
     industry: 'Real Estate',
-    region: 'UAE',
-    title: '42% Lower Customer Acquisition Cost',
-    description: 'Rebuilt ad campaigns with intent-based targeting and conversion-optimized landing pages.',
-    image: IMAGES.caseStudies.realEstate,
+    region: 'India',
+    title: 'Property Listings That Sell Themselves',
+    description: 'Luxury real estate platform for Bangalore with location-based neighbourhood browsing, interactive OpenStreetMap integration, and agent services. Premium property discovery made effortless.',
+    image: IMAGES.caseStudies.realEstateBangalore,
     metrics: [
-      { value: '-42%', label: 'CAC' },
-      { value: '+89%', label: 'Qualified Leads' },
-      { value: '3.2x', label: 'ROAS' },
+      { value: '5+', label: 'Neighbourhoods' },
+      { value: 'Map', label: 'Integration' },
+      { value: '24/7', label: 'Online Listings' },
     ],
-    quote: 'Our previous agency was burning money. Black Arrow showed us exactly where.',
-    client: 'Marketing Director, Dubai Developer',
+    quote: 'Buyers can explore neighbourhoods before they even call us. The platform changed how we present listings entirely.',
+    client: 'Managing Director, Marakk Developers',
+    url: 'https://marakkdevelopers.com',
   },
   {
     icon: <Zap size={24} />,
-    industry: 'Healthcare',
+    industry: 'E-commerce',
     region: 'India',
-    title: '80 Hours/Month Saved on Admin',
-    description: 'Automated patient follow-ups, appointment reminders, and insurance verification.',
-    image: IMAGES.caseStudies.healthcare,
+    title: 'From Showroom to Online Store in 3 Weeks',
+    description: 'E-commerce store for Bangalore\'s trusted bicycle retailer with Google Ads conversion tracking, home test-ride booking, and a catalogue that brings the showroom experience online.',
+    image: IMAGES.caseStudies.bicycleShop,
     metrics: [
-      { value: '80h', label: 'Saved Monthly' },
-      { value: '95%', label: 'Response Rate' },
-      { value: '-45%', label: 'No-Shows' },
+      { value: '3', label: 'Weeks to Launch' },
+      { value: 'Ads', label: 'Tracking Setup' },
+      { value: 'Test Rides', label: 'Home Booking' },
     ],
-    quote: 'Our staff can finally focus on patients instead of paperwork.',
-    client: 'Operations Head, Bangalore Clinic',
-  },
-  {
-    icon: <Search size={24} />,
-    industry: 'Fintech',
-    region: 'UK',
-    title: 'Page 3 to Position 2 in 90 Days',
-    description: 'Rebuilt React SPA with Next.js, implemented structured data, and created content strategy.',
-    image: IMAGES.caseStudies.fintech,
-    metrics: [
-      { value: '#2', label: 'Google Ranking' },
-      { value: '+340%', label: 'Organic Traffic' },
-      { value: '98', label: 'PageSpeed Score' },
-    ],
-    quote: 'We were invisible to Google. Now we\'re on the first page for our main keyword.',
-    client: 'CTO, London Fintech',
+    quote: 'We went from a physical-only shop to getting orders online within three weeks. The speed was incredible.',
+    client: 'Owner, Bharath Cycle Hub',
+    url: 'https://bharathcyclehub.store',
   },
 ];
 
@@ -76,7 +80,7 @@ export default function CaseStudiesPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 overflow-hidden">
+      <Section className="relative pt-40 pb-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <OptimizedImage
@@ -98,8 +102,8 @@ export default function CaseStudiesPage() {
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
             <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              We don&apos;t do case studies with vanity metrics. Every result here
-              drove real business impact for clients across UK, UAE, and India.
+              Real projects, real clients, real impact. Every case study here
+              represents work we&apos;re proud to stand behind.
             </p>
           </FadeIn>
         </div>
@@ -129,7 +133,7 @@ export default function CaseStudiesPage() {
                       <div className="text-warm-sand">{study.icon}</div>
                       <div>
                         <span className="text-sm text-gray-600 dark:text-gray-400">{study.industry}</span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400 mx-2">•</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 mx-2">&bull;</span>
                         <span className="text-sm text-warm-sand">{study.region}</span>
                       </div>
                     </div>
@@ -155,10 +159,21 @@ export default function CaseStudiesPage() {
                       ))}
                     </div>
 
-                    <blockquote className="border-l-2 border-warm-sand pl-4">
+                    <blockquote className="border-l-2 border-warm-sand pl-4 mb-4">
                       <p className="text-gray-700 dark:text-gray-300 italic mb-2">&ldquo;{study.quote}&rdquo;</p>
-                      <cite className="text-sm text-gray-600 dark:text-gray-400">— {study.client}</cite>
+                      <cite className="text-sm text-gray-600 dark:text-gray-400">&mdash; {study.client}</cite>
                     </blockquote>
+
+                    {study.url && (
+                      <a
+                        href={study.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-warm-sand hover:underline"
+                      >
+                        Visit live site &rarr;
+                      </a>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -172,7 +187,7 @@ export default function CaseStudiesPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <FadeIn direction="up" delay={0.1} duration={0.6}>
             <div>
-              <div className="text-4xl font-unbounded font-bold text-warm-sand mb-2">147+</div>
+              <div className="text-4xl font-unbounded font-bold text-warm-sand mb-2">50+</div>
               <div className="text-gray-600 dark:text-gray-400">Projects Delivered</div>
             </div>
           </FadeIn>
@@ -185,13 +200,13 @@ export default function CaseStudiesPage() {
           <FadeIn direction="up" delay={0.3} duration={0.6}>
             <div>
               <div className="text-4xl font-unbounded font-bold text-warm-sand mb-2">3</div>
-              <div className="text-gray-600 dark:text-gray-400">Active Markets</div>
+              <div className="text-gray-600 dark:text-gray-400">Countries Served</div>
             </div>
           </FadeIn>
           <FadeIn direction="up" delay={0.4} duration={0.6}>
             <div>
-              <div className="text-4xl font-unbounded font-bold text-warm-sand mb-2">₹50Cr+</div>
-              <div className="text-gray-600 dark:text-gray-400">Revenue Generated</div>
+              <div className="text-4xl font-unbounded font-bold text-warm-sand mb-2">4</div>
+              <div className="text-gray-600 dark:text-gray-400">Industries</div>
             </div>
           </FadeIn>
         </div>

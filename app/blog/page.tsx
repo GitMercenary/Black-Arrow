@@ -49,7 +49,7 @@ export default function BlogPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="pt-32 pb-12">
+      <Section className="pt-40 pb-12">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn direction="up" duration={0.6}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-unbounded font-bold mb-6 leading-tight">
@@ -57,7 +57,7 @@ export default function BlogPage() {
             </h1>
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
-            <p className="text-xl text-cloud-dancer/80 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 leading-relaxed max-w-2xl mx-auto">
               Actionable insights on e-commerce, digital marketing, and AI automation
               for businesses in the UK, UAE, and India.
             </p>
@@ -87,7 +87,7 @@ export default function BlogPage() {
                 <Link href={`/blog/${post.slug}`} className="block group">
                   <Card hover={true} className="p-6 h-full flex flex-col">
                     {/* Date */}
-                    <div className="flex items-center gap-2 text-sm text-cloud-dancer/60 mb-3">
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-cloud-dancer/60 mb-3">
                       <Calendar size={14} />
                       {formatDate(post.published_at)}
                     </div>
@@ -99,7 +99,7 @@ export default function BlogPage() {
 
                     {/* Excerpt */}
                     {post.excerpt && (
-                      <p className="text-cloud-dancer/70 text-sm mb-4 flex-grow">
+                      <p className="text-gray-500 dark:text-cloud-dancer/70 text-sm mb-4 flex-grow">
                         {post.excerpt}
                       </p>
                     )}
@@ -120,7 +120,7 @@ export default function BlogPage() {
               <h2 className="text-2xl font-unbounded font-bold mb-4">
                 No Posts Yet
               </h2>
-              <p className="text-cloud-dancer/70 mb-6">
+              <p className="text-gray-500 dark:text-cloud-dancer/70 mb-6">
                 We&apos;re working on some great content. Check back soon for insights
                 on e-commerce, marketing, and AI automation.
               </p>
@@ -142,7 +142,7 @@ export default function BlogPage() {
           </h2>
         </FadeIn>
         <FadeIn direction="up" duration={0.6} delay={0.2}>
-          <p className="text-xl text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
             Get a free audit tailored to your business. We&apos;ll analyze your
             digital presence and share actionable recommendations.
           </p>

@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { useModalManager } from './ModalManagerContext';
 
 export type WebDevService = 'website-development' | 'landing-page' | 'business-site' | 'custom-web-app';
 
@@ -16,12 +17,17 @@ const WebDevQuoteContext = createContext<WebDevQuoteContextType | undefined>(und
 export function WebDevQuoteProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [service, setService] = useState<WebDevService>('website-development');
+  const { registerModal, unregisterModal } = useModalManager();
 
   const openQuote = (s: WebDevService = 'website-development') => {
     setService(s);
+    registerModal('webdev-quote');
     setIsOpen(true);
   };
-  const closeQuote = () => setIsOpen(false);
+  const closeQuote = () => {
+    setIsOpen(false);
+    unregisterModal('webdev-quote');
+  };
 
   return (
     <WebDevQuoteContext.Provider value={{ isOpen, service, openQuote, closeQuote }}>

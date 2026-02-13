@@ -50,7 +50,7 @@ export default function SEOPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 overflow-hidden">
+      <Section className="relative pt-40 pb-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <OptimizedImage
@@ -77,7 +77,7 @@ export default function SEOPage() {
             </h1>
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
-            <p className="text-xl text-cloud-dancer/80 leading-relaxed max-w-3xl">
+            <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 leading-relaxed max-w-3xl">
             Core Web Vitals optimization, structured data, and content strategies
             that Google rewards. We don&apos;t chase algorithms - we build foundations.
           </p>
@@ -92,10 +92,10 @@ export default function SEOPage() {
             <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-4">
               Page 3 → Position 2 in 90 Days
             </h2>
-            <p className="text-lg text-cloud-dancer/80 mb-2">
+            <p className="text-lg text-gray-600 dark:text-cloud-dancer/80 mb-2">
               Fintech startup, London
             </p>
-            <p className="text-cloud-dancer/70 leading-relaxed">
+            <p className="text-gray-500 dark:text-cloud-dancer/70 leading-relaxed">
               A React-heavy SPA was invisible to Google. We rebuilt their architecture
               with Next.js, implemented proper structured data, and created a content
               strategy that established topical authority.
@@ -128,7 +128,7 @@ export default function SEOPage() {
             <Card key={feature.title} hover={false} className="p-6">
               <div className="text-warm-sand mb-4">{feature.icon}</div>
               <h3 className="text-lg font-unbounded font-bold mb-2">{feature.title}</h3>
-              <p className="text-cloud-dancer/70 text-sm">{feature.description}</p>
+              <p className="text-gray-500 dark:text-cloud-dancer/70 text-sm">{feature.description}</p>
             </Card>
           ))}
         </div>
@@ -144,7 +144,7 @@ export default function SEOPage() {
             {['Ahrefs', 'Semrush', 'Screaming Frog', 'Google Search Console', 'PageSpeed Insights', 'Schema.org', 'Sitebulb', 'Surfer SEO'].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm"
+                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm text-cloud-dancer"
               >
                 {tool}
               </span>
@@ -158,7 +158,7 @@ export default function SEOPage() {
         <h2 className="text-3xl md:text-4xl font-unbounded font-bold mb-6">
           Ready to Rank?
         </h2>
-        <p className="text-xl text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
           Get a free SEO audit. We&apos;ll show you exactly what&apos;s holding
           you back from page one.
         </p>

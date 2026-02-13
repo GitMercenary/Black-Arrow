@@ -251,7 +251,7 @@ export default function CafeLandingPage() {
           <div className="absolute bottom-20 left-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
+        <div className="container mx-auto px-4 pt-40 pb-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
             {/* Urgency badge */}

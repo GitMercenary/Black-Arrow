@@ -53,6 +53,12 @@ export const IMAGES = {
 
     // NEW: E-commerce success metrics
     successMetrics: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+
+    // Real client case studies
+    autoparts: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200&q=80',
+    interiorDesign: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80',
+    realEstateBangalore: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80',
+    bicycleShop: 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=1200&q=80',
   },
 
   services: {

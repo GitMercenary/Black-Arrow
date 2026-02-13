@@ -55,7 +55,7 @@ export default function BlogPostPage() {
   if (loading) {
     return (
       <main>
-        <Section className="pt-32">
+        <Section className="pt-40">
           <div className="max-w-3xl mx-auto animate-pulse">
             <div className="h-4 bg-slate-ui rounded w-1/4 mb-4"></div>
             <div className="h-10 bg-slate-ui rounded w-full mb-2"></div>
@@ -76,7 +76,7 @@ export default function BlogPostPage() {
   return (
     <main>
       {/* Back Link */}
-      <Section className="pt-32 pb-4">
+      <Section className="pt-40 pb-4">
         <FadeIn direction="up" duration={0.5}>
           <Link
             href="/blog"

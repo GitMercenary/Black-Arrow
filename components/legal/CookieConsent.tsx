@@ -10,6 +10,7 @@ import {
   type CookiePreferences,
 } from '@/lib/utils/cookies';
 import { cn } from '@/lib/utils/cn';
+import { usePopupManager } from '@/lib/contexts/PopupManagerContext';
 import Button from '@/components/ui/Button';
 
 /**
@@ -31,6 +32,7 @@ import Button from '@/components/ui/Button';
  */
 
 export default function CookieConsent() {
+  const { requestShow, dismiss } = usePopupManager();
   const [isVisible, setIsVisible] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -43,11 +45,15 @@ export default function CookieConsent() {
   useEffect(() => {
     // Check if user has already made a choice
     if (!hasConsentChoice()) {
-      // Show notification after a short delay to not overwhelm on page load
-      const timer = setTimeout(() => setIsVisible(true), 1500);
+      // Show notification after a short delay (only if popup manager allows)
+      const timer = setTimeout(() => {
+        if (requestShow('cookie')) {
+          setIsVisible(true);
+        }
+      }, 1500);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [requestShow]);
 
   const handleAcceptAll = () => {
     const allAccepted: CookiePreferences = {
@@ -58,6 +64,7 @@ export default function CookieConsent() {
     };
     saveCookiePreferences(allAccepted);
     setIsVisible(false);
+    dismiss('cookie');
 
     // Reload to apply analytics scripts
     window.location.reload();
@@ -72,11 +79,13 @@ export default function CookieConsent() {
     };
     saveCookiePreferences(onlyNecessary);
     setIsVisible(false);
+    dismiss('cookie');
   };
 
   const handleSaveCustom = () => {
     saveCookiePreferences(preferences);
     setIsVisible(false);
+    dismiss('cookie');
 
     // Reload to apply/remove analytics scripts based on preferences
     window.location.reload();

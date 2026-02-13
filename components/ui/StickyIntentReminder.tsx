@@ -39,7 +39,7 @@ export default function StickyIntentReminder() {
     }
   }, [shouldShowSticky]);
 
-  if (!stickyContent || !isVisible) return null;
+  if (!stickyContent) return null;
 
   // Get the correct price based on region
   const displayPrice = stickyContent.showPrice

@@ -9,7 +9,7 @@ export const metadata = {
 export default function CookiePolicyPage() {
   return (
     <main>
-      <Section className="pt-32 pb-12">
+      <Section className="pt-40 pb-12">
         <div className="max-w-3xl mx-auto">
           <FadeIn direction="up" duration={0.6}>
             <h1 className="text-4xl md:text-5xl font-unbounded font-bold mb-6">

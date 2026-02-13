@@ -10,14 +10,15 @@ import FadeIn from '@/components/animations/FadeIn';
 import OptimizedImage from '@/components/ui/OptimizedImage';
 import { IMAGES } from '@/lib/constants/images';
 import { useAIAudit } from '@/lib/contexts/AIAuditContext';
+import AIToolLogos from '@/components/ui/AIToolLogos';
 
 const SERVICES = [
   {
-    icon: <ShoppingCart size={48} strokeWidth={2} />,
-    title: 'E-Commerce Development',
-    description: 'Headless commerce platforms with AI-powered recommendations, dynamic pricing, and zero downtime.',
-    href: '/services/ecommerce',
-    stat: '₹2.3Cr revenue unlocked',
+    icon: <Code size={48} strokeWidth={2} />,
+    title: 'Website Development',
+    description: 'Landing pages, business sites, and custom web apps built for conversion and speed.',
+    href: '/services/website-development',
+    stat: 'From £350 / ₹29,999',
   },
   {
     icon: <TrendingUp size={48} strokeWidth={2} />,
@@ -34,18 +35,18 @@ const SERVICES = [
     stat: '80 hours/month saved',
   },
   {
-    icon: <Search size={48} strokeWidth={2} />,
-    title: 'Technical SEO',
-    description: 'Core Web Vitals optimization, structured data, and content strategies that Google rewards.',
-    href: '/services/seo',
-    stat: 'Page 3 → Position 2',
+    icon: <ShoppingCart size={48} strokeWidth={2} />,
+    title: 'E-Commerce Development',
+    description: 'Headless commerce platforms with AI-powered recommendations, dynamic pricing, and zero downtime.',
+    href: '/services/ecommerce',
+    stat: '₹2.3Cr revenue unlocked',
   },
   {
-    icon: <Code size={48} strokeWidth={2} />,
-    title: 'Website Development',
-    description: 'Landing pages, business sites, and custom web apps built for conversion and speed.',
-    href: '/services/website-development',
-    stat: 'From £350 / ₹29,999',
+    icon: <Search size={48} strokeWidth={2} />,
+    title: 'Technical SEO, GEO & AEO',
+    description: 'Core Web Vitals optimization, structured data, and AI search optimization strategies.',
+    href: '/services/seo',
+    stat: 'Page 3 → Position 2',
   },
 ];
 
@@ -55,7 +56,7 @@ export default function ServicesPage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 overflow-hidden">
+      <Section className="relative pt-40 pb-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <OptimizedImage
@@ -76,7 +77,7 @@ export default function ServicesPage() {
             </h1>
           </FadeIn>
           <FadeIn direction="up" duration={0.6} delay={0.2}>
-            <p className="text-xl text-cloud-dancer/80 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 leading-relaxed max-w-2xl mx-auto">
               We don&apos;t do vanity metrics. Every service is engineered to drive
               measurable business outcomes across UK, UAE, and India markets.
             </p>
@@ -108,6 +109,9 @@ export default function ServicesPage() {
         </BentoGrid>
       </Section>
 
+      {/* AI Tool Logos */}
+      <AIToolLogos />
+
       {/* Process Section */}
       <Section className="bg-gray-100 dark:bg-neutral-900">
         <div className="max-w-4xl mx-auto">
@@ -123,7 +127,7 @@ export default function ServicesPage() {
                   <span className="text-2xl font-unbounded font-bold text-warm-sand">1</span>
                 </div>
                 <h3 className="text-xl font-unbounded font-bold mb-2">Audit</h3>
-                <p className="text-cloud-dancer/70">
+                <p className="text-gray-500 dark:text-cloud-dancer/70">
                   We analyze your current digital presence, competitors, and market opportunities.
                 </p>
               </div>
@@ -134,7 +138,7 @@ export default function ServicesPage() {
                   <span className="text-2xl font-unbounded font-bold text-warm-sand">2</span>
                 </div>
                 <h3 className="text-xl font-unbounded font-bold mb-2">Strategy</h3>
-                <p className="text-cloud-dancer/70">
+                <p className="text-gray-500 dark:text-cloud-dancer/70">
                   We create a data-backed roadmap with clear KPIs and ROI projections.
                 </p>
               </div>
@@ -145,7 +149,7 @@ export default function ServicesPage() {
                   <span className="text-2xl font-unbounded font-bold text-warm-sand">3</span>
                 </div>
                 <h3 className="text-xl font-unbounded font-bold mb-2">Execute</h3>
-                <p className="text-cloud-dancer/70">
+                <p className="text-gray-500 dark:text-cloud-dancer/70">
                   We build, launch, and optimize with weekly reporting and continuous improvement.
                 </p>
               </div>
@@ -162,7 +166,7 @@ export default function ServicesPage() {
           </h2>
         </FadeIn>
         <FadeIn direction="up" duration={0.6} delay={0.2}>
-          <p className="text-xl text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-cloud-dancer/80 mb-8 max-w-2xl mx-auto">
             Get a free audit of your digital presence. No obligations, just actionable insights.
           </p>
         </FadeIn>

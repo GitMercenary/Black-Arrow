@@ -12,6 +12,7 @@ import { IMAGES } from '@/lib/constants/images';
 import { Layout, Briefcase, Code, ArrowRight, CheckCircle2, Zap, Shield, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // Regional pricing for Landing Page
 const LANDING_PAGE_PRICES: Record<string, string> = {
@@ -74,12 +75,13 @@ const whyChooseUs = [
 export default function WebsiteDevelopmentPage() {
   const { currentRegion } = useRegion();
   const { openQuote } = useWebDevQuote();
+  const router = useRouter();
   const landingPagePrice = LANDING_PAGE_PRICES[currentRegion] || LANDING_PAGE_PRICES.UK;
 
   return (
     <main className="pb-20">
       {/* Hero Section with Image */}
-      <Section className="pt-32 pb-16 bg-gradient-to-b from-warm-sand/5 to-transparent">
+      <Section className="pt-40 pb-16 bg-gradient-to-b from-warm-sand/5 to-transparent">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeIn direction="up" duration={0.6}>
@@ -113,6 +115,25 @@ export default function WebsiteDevelopmentPage() {
                     See Our Work
                   </Button>
                 </a>
+              </div>
+            </FadeIn>
+
+            {/* Mobile Quick Nav */}
+            <FadeIn direction="up" duration={0.6} delay={0.35}>
+              <div className="sm:hidden mb-6">
+                <select
+                  onChange={(e) => {
+                    if (e.target.value) router.push(e.target.value);
+                  }}
+                  defaultValue=""
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-white font-medium appearance-none"
+                  aria-label="Quick navigate to service type"
+                >
+                  <option value="" disabled>Jump to a service...</option>
+                  <option value="/services/website-development/landing-page">Landing Page</option>
+                  <option value="/services/website-development/business-site">Business Website</option>
+                  <option value="/services/website-development/custom-web-app">Custom Web App</option>
+                </select>
               </div>
             </FadeIn>
 

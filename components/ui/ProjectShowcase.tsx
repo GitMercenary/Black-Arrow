@@ -19,15 +19,17 @@ const filters: { value: FilterCategory; label: string }[] = [
 interface ProjectShowcaseProps {
   maxItems?: number;
   showFilters?: boolean;
+  defaultFilter?: FilterCategory;
   className?: string;
 }
 
 export default function ProjectShowcase({
   maxItems,
   showFilters = true,
+  defaultFilter = 'all',
   className = '',
 }: ProjectShowcaseProps) {
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
+  const [activeFilter, setActiveFilter] = useState<FilterCategory>(defaultFilter);
 
   const filteredProjects = WEBSITE_DEV_PROJECTS.filter(
     (p) => activeFilter === 'all' || p.category === activeFilter
@@ -124,7 +126,7 @@ export default function ProjectShowcase({
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-1 bg-gray-100 dark:bg-neutral-800 rounded-md text-xs text-gray-600 dark:text-cloud-dancer/60"
+                        className="px-2.5 py-1 bg-warm-sand/10 border border-warm-sand/20 rounded-full text-xs text-warm-sand font-medium"
                       >
                         {tag}
                       </span>

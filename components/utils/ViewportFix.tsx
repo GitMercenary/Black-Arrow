@@ -16,10 +16,8 @@ export default function ViewportFix() {
       // Trigger a scroll event to force recalculation
       window.scrollTo(0, window.scrollY);
 
-      // Force browser reflow
-      document.body.style.display = 'none';
-      document.body.offsetHeight; // Trigger reflow
-      document.body.style.display = '';
+      // Force browser reflow without hiding the page
+      void document.body.offsetHeight;
     };
 
     // Run after a short delay to ensure fonts are loaded

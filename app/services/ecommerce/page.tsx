@@ -51,7 +51,7 @@ export default function EcommercePage() {
   return (
     <main>
       {/* Hero Section */}
-      <Section className="relative pt-32 pb-12 overflow-hidden">
+      <Section className="relative pt-40 pb-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <OptimizedImage
@@ -145,7 +145,7 @@ export default function EcommercePage() {
             {['Next.js', 'Shopify Headless', 'Medusa', 'Stripe', 'Algolia', 'Vercel', 'Supabase', 'TensorFlow'].map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm"
+                className="px-4 py-2 bg-deep-obsidian border border-slate-ui rounded-full text-sm text-cloud-dancer"
               >
                 {tech}
               </span>

@@ -236,9 +236,9 @@ CREATE POLICY "Admins can update stats"
 
 -- Seed Data
 INSERT INTO stats (key, value, label) VALUES
-('projects_delivered', '147', 'Projects Delivered'),
+('projects_delivered', '50+', 'Projects Delivered'),
 ('client_retention', '98%', 'Client Retention'),
-('active_markets', '3', 'Active Markets')
+('active_markets', '3', 'Countries Served')
 ON CONFLICT (key) DO NOTHING;
 
 -- ======================

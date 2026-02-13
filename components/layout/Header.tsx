@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from 'react';
 import MegaMenu from './MegaMenu';
 import Logo from '@/components/ui/Logo';
 import Portal from '@/components/ui/Portal';
+import LaunchBanner from '@/components/ui/LaunchBanner';
 
 export default function Header() {
   const { currentRegion, setRegion } = useRegion();
@@ -19,11 +20,13 @@ export default function Header() {
   const [regionMenuOpen, setRegionMenuOpen] = useState(false);
   const [mobileRegionMenuOpen, setMobileRegionMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [megaMenuPinned, setMegaMenuPinned] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
   const lastScrollY = useRef(0);
+  const megaMenuCloseTimeout = useRef<NodeJS.Timeout | null>(null);
   const regionMenuRef = useRef<HTMLDivElement>(null);
   const regionButtonRef = useRef<HTMLButtonElement>(null);
   const mobileRegionMenuRef = useRef<HTMLDivElement>(null);
@@ -127,8 +130,8 @@ export default function Header() {
       } ${
         !isVisible ? '-translate-y-full' : 'translate-y-0'
       }`}
-      onMouseLeave={() => setMegaMenuOpen(false)}
     >
+      <LaunchBanner />
       <nav className={`container mx-auto px-4 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -139,13 +142,44 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-              onMouseEnter={() => setMegaMenuOpen(true)}
+              onClick={() => {
+                if (megaMenuOpen && megaMenuPinned) {
+                  setMegaMenuOpen(false);
+                  setMegaMenuPinned(false);
+                } else if (megaMenuOpen && !megaMenuPinned) {
+                  setMegaMenuPinned(true);
+                } else {
+                  setMegaMenuOpen(true);
+                  setMegaMenuPinned(true);
+                }
+                if (megaMenuCloseTimeout.current) {
+                  clearTimeout(megaMenuCloseTimeout.current);
+                  megaMenuCloseTimeout.current = null;
+                }
+              }}
+              onMouseEnter={() => {
+                if (megaMenuCloseTimeout.current) {
+                  clearTimeout(megaMenuCloseTimeout.current);
+                  megaMenuCloseTimeout.current = null;
+                }
+                if (!megaMenuOpen) {
+                  setMegaMenuOpen(true);
+                  setMegaMenuPinned(false);
+                }
+              }}
+              onMouseLeave={() => {
+                if (!megaMenuPinned) {
+                  megaMenuCloseTimeout.current = setTimeout(() => {
+                    setMegaMenuOpen(false);
+                  }, 200);
+                }
+              }}
               className={`flex items-center gap-1 text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-all px-3 py-2 rounded-md ${
                 megaMenuOpen ? 'bg-warm-sand/10 text-warm-sand' : ''
               }`}
               aria-label="Services menu"
               aria-expanded={megaMenuOpen}
+              aria-haspopup="true"
             >
               <span className="font-medium">Services</span>
               <ChevronDown
@@ -158,6 +192,9 @@ export default function Header() {
             </Link>
             <Link href="/portfolio" className="text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors">
               Portfolio
+            </Link>
+            <Link href="/about" className="text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors">
+              About
             </Link>
             <Link href="/blog" className="text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors">
               Blog
@@ -271,8 +308,8 @@ export default function Header() {
                   <Link href="/services" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
                     All Services
                   </Link>
-                  <Link href="/services/ecommerce" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                    <ShoppingCart size={16} className="text-warm-sand" /> E-Commerce
+                  <Link href="/services/website-development" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Code size={16} className="text-warm-sand" /> Website Development
                   </Link>
                   <Link href="/services/ads" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
                     <TrendingUp size={16} className="text-warm-sand" /> Performance Ads
@@ -280,11 +317,11 @@ export default function Header() {
                   <Link href="/services/automation" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
                     <Zap size={16} className="text-warm-sand" /> Automation & AI
                   </Link>
-                  <Link href="/services/seo" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                    <Search size={16} className="text-warm-sand" /> Technical SEO
+                  <Link href="/services/ecommerce" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <ShoppingCart size={16} className="text-warm-sand" /> E-Commerce
                   </Link>
-                  <Link href="/services/website-development" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                    <Code size={16} className="text-warm-sand" /> Website Development
+                  <Link href="/services/seo" className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-cloud-dancer/70 hover:text-warm-sand transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Search size={16} className="text-warm-sand" /> Technical SEO, GEO & AEO
                   </Link>
                 </div>
               )}
@@ -302,6 +339,13 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Portfolio
+            </Link>
+            <Link
+              href="/about"
+              className="block text-gray-800 dark:text-cloud-dancer hover:text-warm-sand transition-colors py-3 min-h-[44px]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
             </Link>
             <Link
               href="/blog"
@@ -405,7 +449,27 @@ export default function Header() {
       {/* Mega Menu */}
       <MegaMenu
         isOpen={megaMenuOpen}
-        onClose={() => setMegaMenuOpen(false)}
+        onClose={() => {
+          setMegaMenuOpen(false);
+          setMegaMenuPinned(false);
+          if (megaMenuCloseTimeout.current) {
+            clearTimeout(megaMenuCloseTimeout.current);
+            megaMenuCloseTimeout.current = null;
+          }
+        }}
+        onMouseEnter={() => {
+          if (megaMenuCloseTimeout.current) {
+            clearTimeout(megaMenuCloseTimeout.current);
+            megaMenuCloseTimeout.current = null;
+          }
+        }}
+        onMouseLeave={() => {
+          if (!megaMenuPinned) {
+            megaMenuCloseTimeout.current = setTimeout(() => {
+              setMegaMenuOpen(false);
+            }, 200);
+          }
+        }}
         onOpenAIAudit={() => openAudit()}
       />
     </header>
