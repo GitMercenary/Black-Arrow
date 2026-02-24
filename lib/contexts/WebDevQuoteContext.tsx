@@ -8,7 +8,8 @@ export type WebDevService = 'website-development' | 'landing-page' | 'business-s
 interface WebDevQuoteContextType {
   isOpen: boolean;
   service: WebDevService;
-  openQuote: (service?: WebDevService) => void;
+  packageHint: string;
+  openQuote: (service?: WebDevService, packageHint?: string) => void;
   closeQuote: () => void;
 }
 
@@ -17,10 +18,12 @@ const WebDevQuoteContext = createContext<WebDevQuoteContextType | undefined>(und
 export function WebDevQuoteProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [service, setService] = useState<WebDevService>('website-development');
+  const [packageHint, setPackageHint] = useState('');
   const { registerModal, unregisterModal } = useModalManager();
 
-  const openQuote = (s: WebDevService = 'website-development') => {
+  const openQuote = (s: WebDevService = 'website-development', hint: string = '') => {
     setService(s);
+    setPackageHint(hint);
     registerModal('webdev-quote');
     setIsOpen(true);
   };
@@ -30,7 +33,7 @@ export function WebDevQuoteProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <WebDevQuoteContext.Provider value={{ isOpen, service, openQuote, closeQuote }}>
+    <WebDevQuoteContext.Provider value={{ isOpen, service, packageHint, openQuote, closeQuote }}>
       {children}
     </WebDevQuoteContext.Provider>
   );

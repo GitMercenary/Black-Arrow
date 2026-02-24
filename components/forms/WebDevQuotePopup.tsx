@@ -1,12 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Code, Check } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils/cn';
 import { useWebDevQuote, type WebDevService } from '@/lib/contexts/WebDevQuoteContext';
 import Button from '../ui/Button';
 import FieldError from '../ui/FieldError';
+
+const PACKAGES = [
+  { name: 'Starter', price: '₹11,999' },
+  { name: 'Growth', price: '₹24,999' },
+  { name: 'Performance', price: '₹44,999' },
+];
 
 const SERVICE_LABELS: Record<WebDevService, string> = {
   'website-development': 'Website Development',
@@ -16,7 +22,8 @@ const SERVICE_LABELS: Record<WebDevService, string> = {
 };
 
 export default function WebDevQuotePopup() {
-  const { isOpen, service, closeQuote } = useWebDevQuote();
+  const { isOpen, service, packageHint, closeQuote } = useWebDevQuote();
+  const [selectedPackage, setSelectedPackage] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -28,6 +35,13 @@ export default function WebDevQuotePopup() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState(false);
+
+  // Sync selectedPackage when popup opens with a hint
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedPackage(packageHint === 'any' || packageHint === '' ? '' : packageHint);
+    }
+  }, [isOpen, packageHint]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +73,7 @@ export default function WebDevQuotePopup() {
           phone: formData.phone || null,
           website: formData.website || null,
           service_interest: `webdev_${service}`,
-          message: `[Web Dev Quote - ${SERVICE_LABELS[service]}] ${formData.projectDetails || 'No details provided'}`,
+          message: `[Web Dev Quote - ${SERVICE_LABELS[service]}${selectedPackage ? ` / Package: ${selectedPackage}` : ''}] ${formData.projectDetails || 'No details provided'}`,
           status: 'new',
           source: `webdev_quote_${service}`,
           created_at: new Date().toISOString(),
@@ -73,6 +87,7 @@ export default function WebDevQuotePopup() {
         closeQuote();
         setTimeout(() => {
           setFormData({ fullName: '', email: '', company: '', phone: '', website: '', projectDetails: '' });
+          setSelectedPackage('');
           setSuccess(false);
         }, 300);
       }, 3000);
@@ -155,6 +170,33 @@ export default function WebDevQuotePopup() {
                   Tell us about your project and we&apos;ll send you a detailed quote within 24 hours. No obligations.
                 </p>
               </div>
+
+              {/* Package picker — only shown when coming from limited period page */}
+              {packageHint !== '' && (
+                <div className="mb-3">
+                  <label className="block text-xs font-medium mb-2 text-gray-900 dark:text-cloud-dancer">
+                    Which package are you interested in? <span className="text-warm-sand">*</span>
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {PACKAGES.map((pkg) => (
+                      <button
+                        key={pkg.name}
+                        type="button"
+                        onClick={() => setSelectedPackage(pkg.name)}
+                        className={cn(
+                          'flex flex-col items-center justify-center gap-1 py-2.5 px-2 rounded-lg border-2 text-xs font-medium transition-all',
+                          selectedPackage === pkg.name
+                            ? 'border-warm-sand bg-warm-sand/10 text-warm-sand'
+                            : 'border-stone-200 dark:border-neutral-700 text-gray-600 dark:text-cloud-dancer/70 hover:border-warm-sand/50'
+                        )}
+                      >
+                        <span className="font-unbounded font-bold text-[11px]">{pkg.name}</span>
+                        <span className="text-warm-sand font-semibold">{pkg.price}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-2.5">
                 {/* Name & Email */}

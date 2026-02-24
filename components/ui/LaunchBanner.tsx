@@ -2,13 +2,18 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { X, Check } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { usePopupManager } from '@/lib/contexts/PopupManagerContext';
+import { useWebDevQuote } from '@/lib/contexts/WebDevQuoteContext';
 import Portal from '@/components/ui/Portal';
 
 const BANNER_DISMISSED_KEY = 'bat-launch-banner-dismissed';
 
 export default function LaunchBanner() {
+  const pathname = usePathname();
+  const isLimitedPeriod = pathname?.includes('website-development-limited-period') ?? false;
+  const { openQuote } = useWebDevQuote();
   const [isVisible, setIsVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
@@ -131,17 +136,19 @@ export default function LaunchBanner() {
       <div className="bg-warm-sand text-deep-obsidian relative">
         <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-sm sm:text-base">
           <span className="font-bold">
-            Launch Offer:
+            {isLimitedPeriod ? 'LIMITED PERIOD OFFER' : 'Launch Offer:'}
           </span>
           <span className="hidden sm:inline">
-            First 5 Clients Get 50% Off + Free Speed Audit
+            {isLimitedPeriod ? 'Website Plans from ₹11,999 — Limited Slots Available' : 'First 5 Clients Get 50% Off + Free Speed Audit'}
           </span>
           <span className="sm:hidden">
-            50% Off for First 5 Clients
+            {isLimitedPeriod ? 'From ₹11,999 — Limited Slots' : '50% Off for First 5 Clients'}
           </span>
           <button
             onClick={() => {
-              if (requestShow('launch')) {
+              if (isLimitedPeriod) {
+                openQuote('website-development', 'any');
+              } else if (requestShow('launch')) {
                 setShowForm(true);
               }
             }}

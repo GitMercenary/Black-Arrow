@@ -3,17 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import GlassCard from '@/components/ui/GlassCard';
 import Button from '@/components/ui/Button';
 import BlurFade from '@/components/animations/BlurFade';
-import Parallax from '@/components/animations/Parallax';
-import HoverReveal from '@/components/animations/HoverReveal';
+import FadeIn from '@/components/animations/FadeIn';
 import { portfolioProjects, getFeaturedProjects } from '@/lib/data/portfolioData';
-import { ArrowRight, ExternalLink, Calendar, Tag } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ExternalLink } from 'lucide-react';
 
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState<string>('All');
-  const [viewMode, setViewMode] = useState<'featured' | 'all'>('featured');
 
   const industries = ['All', 'Real Estate', 'Hospitality', 'Automotive', 'Tech', 'E-commerce'];
 
@@ -26,99 +23,163 @@ export default function PortfolioPage() {
 
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-neutral-950 pt-24">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20">
-        <Parallax speed={0.3} direction="down">
-          <BlurFade delay={0.1}>
-            <h1 className="text-6xl md:text-8xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 mb-6">
-              Selected Work
-            </h1>
-          </BlurFade>
-        </Parallax>
 
-        <BlurFade delay={0.2}>
-          <p className="text-xl text-stone-600 dark:text-neutral-400 font-geist max-w-2xl">
-            A curated collection of websites and applications we've crafted. Each project
-            showcases our approach to functionality, design, and user experience.
-          </p>
-        </BlurFade>
-      </section>
+      {/* ─── SECTION 1: HERO ─── */}
+      <section className="relative overflow-hidden pt-8 pb-0">
+        {/* Background gradient + pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-sand/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-pattern-topo pointer-events-none" />
 
-      {/* Featured Projects - Large Bento Grid */}
-      <section className="container mx-auto px-4 py-20">
-        <BlurFade delay={0.4}>
-          <h2 className="text-3xl md:text-4xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 mb-12">
-            Featured Projects
-          </h2>
-        </BlurFade>
+        <div className="relative container mx-auto px-4 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <BlurFade key={project.id} delay={0.5 + index * 0.1}>
-              <Link href={`/portfolio/${project.id}`} className="group block">
-                <div>
-                  {/* Image Card */}
-                  <GlassCard
-                    variant="hover"
-                    intensity="subtle"
-                    className="relative overflow-hidden h-[400px] p-0 mb-4"
-                  >
-                    {/* Background Image */}
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                      style={{
-                        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('${project.thumbnail}')`,
-                      }}
-                    />
+            {/* Left: Heading + Subtitle */}
+            <div className="lg:col-span-7">
+              <BlurFade delay={0.05}>
+                <span className="font-space text-xs uppercase tracking-[0.2em] text-warm-sand mb-6 block">
+                  Portfolio
+                </span>
+              </BlurFade>
+              <BlurFade delay={0.1}>
+                <h1 className="font-unbounded font-bold text-5xl md:text-7xl lg:text-8xl text-stone-900 dark:text-neutral-100 leading-[1.05] mb-6">
+                  Selected<br />
+                  <span className="text-warm-sand">Work</span>
+                </h1>
+              </BlurFade>
+              <BlurFade delay={0.25}>
+                <p className="font-hanken text-lg md:text-xl text-stone-600 dark:text-neutral-400 max-w-xl leading-relaxed">
+                  A curated collection of websites and applications we&apos;ve crafted. Each
+                  project showcases our approach to functionality, design, and user experience.
+                </p>
+              </BlurFade>
+            </div>
 
-                    {/* Category Tag - Top Left */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <div className="inline-flex items-center gap-2 bg-warm-sand/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                        <Tag className="w-4 h-4" />
-                        <span className="text-sm font-space font-bold text-stone-900">
-                          {project.industry}
-                        </span>
-                      </div>
+            {/* Right: Stats Strip */}
+            <div className="lg:col-span-5">
+              <FadeIn direction="left" delay={0.3} duration={0.6}>
+                <div className="grid grid-cols-2 gap-8 lg:gap-10">
+                  {[
+                    { number: '50+', label: 'Projects Built' },
+                    { number: '10+', label: 'Industries Served' },
+                    { number: '4+', label: 'Years Active' },
+                    { number: '3', label: 'Countries' },
+                  ].map((stat) => (
+                    <div key={stat.label} className="border-l-2 border-warm-sand/30 pl-6">
+                      <p className="font-unbounded font-bold text-4xl md:text-5xl text-warm-sand leading-none mb-2">
+                        {stat.number}
+                      </p>
+                      <p className="font-hanken text-sm text-stone-500 dark:text-neutral-500 uppercase tracking-wide">
+                        {stat.label}
+                      </p>
                     </div>
-                  </GlassCard>
-
-                  {/* Content Below Card */}
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 group-hover:text-warm-sand transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-stone-600 dark:text-neutral-400 font-geist text-sm line-clamp-2">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-stone-200 dark:bg-neutral-800 rounded-full text-xs font-space text-stone-600 dark:text-neutral-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </Link>
-            </BlurFade>
-          ))}
+              </FadeIn>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Bottom gradient divider */}
+        <div className="container mx-auto px-4">
+          <div className="h-px bg-gradient-to-r from-transparent via-warm-sand/30 to-transparent" />
         </div>
       </section>
 
-      {/* Industry Sections - Tabbed Grid */}
-      <section className="container mx-auto px-4 py-20">
-        <BlurFade delay={0.6}>
-          <h2 className="text-3xl md:text-4xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 mb-8">
+      {/* ─── SECTION 2: FEATURED PROJECTS (ASYMMETRIC BENTO GRID) ─── */}
+      <section className="container mx-auto px-4 py-24">
+        <FadeIn direction="up" duration={0.6}>
+          <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-stone-900 dark:text-neutral-100 mb-12">
+            Featured Work
+          </h2>
+        </FadeIn>
+
+        <div className="grid grid-cols-12 gap-4 md:gap-6">
+          {featuredProjects.map((project, index) => {
+            const isLarge = index === 0;
+            return (
+              <FadeIn
+                key={project.id}
+                direction="up"
+                delay={0.1 + index * 0.12}
+                duration={0.6}
+                className={
+                  isLarge
+                    ? 'col-span-12 md:col-span-7 md:row-span-2'
+                    : 'col-span-12 md:col-span-5'
+                }
+              >
+                <Link
+                  href={`/portfolio/${project.id}`}
+                  className={`group relative block overflow-hidden rounded-2xl ${
+                    isLarge ? 'h-[500px]' : 'h-[300px] md:h-[240px]'
+                  }`}
+                >
+                  {/* Background image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-smooth group-hover:scale-105"
+                    style={{ backgroundImage: `url('${project.thumbnail}')` }}
+                  />
+
+                  {/* Gradient scrim */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Category pill — top left */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-block bg-warm-sand text-stone-900 font-space text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
+                      {project.industry}
+                    </span>
+                  </div>
+
+                  {/* Bottom content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    {/* Description — hover only */}
+                    <p className="font-hanken text-sm text-neutral-300 leading-relaxed mb-3 max-w-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      {project.description.length > 100
+                        ? project.description.slice(0, 100) + '...'
+                        : project.description}
+                    </p>
+
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <h3
+                          className={`font-unbounded font-bold text-white leading-tight ${
+                            isLarge ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'
+                          }`}
+                        >
+                          {project.title.split(' - ')[0]}
+                        </h3>
+                        <p className="font-hanken text-sm text-neutral-400 mt-1">
+                          {project.client}
+                        </p>
+                      </div>
+                      <ArrowUpRight
+                        className="text-warm-sand opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0 ml-4"
+                        size={24}
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </FadeIn>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── SECTION 3: ALL PROJECTS (FILTERABLE GRID) ─── */}
+      <section className="container mx-auto px-4 py-24">
+        <FadeIn direction="up" duration={0.6}>
+          <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-stone-900 dark:text-neutral-100 mb-8">
             All Projects
           </h2>
-        </BlurFade>
+        </FadeIn>
 
-        {/* Filter Chips */}
-        <BlurFade delay={0.65}>
-          <p className="text-sm font-space text-stone-500 dark:text-neutral-500 mb-4 uppercase tracking-wide">
+        {/* Filter pills */}
+        <FadeIn direction="up" delay={0.1} duration={0.5}>
+          <p className="font-hanken text-sm text-stone-500 dark:text-neutral-500 mb-4 uppercase tracking-wide">
             Filter by Industry
           </p>
           <div className="flex flex-wrap gap-3 mb-12">
@@ -127,11 +188,12 @@ export default function PortfolioPage() {
                 key={industry}
                 onClick={() => setActiveFilter(industry)}
                 className={`
-                  px-6 py-3 rounded-full font-geist font-medium transition-all duration-300 ease-smooth
+                  px-5 py-2.5 rounded-full font-hanken font-medium text-sm
+                  transition-all duration-300 ease-smooth
                   ${
                     activeFilter === industry
-                      ? 'bg-warm-sand text-stone-900 shadow-md scale-105'
-                      : 'bg-stone-200 dark:bg-neutral-800 text-stone-600 dark:text-neutral-400 hover:bg-stone-300 dark:hover:bg-neutral-700'
+                      ? 'bg-warm-sand text-stone-900 shadow-sm scale-105'
+                      : 'bg-stone-100 dark:bg-neutral-800 text-stone-600 dark:text-neutral-400 hover:bg-stone-200 dark:hover:bg-neutral-700'
                   }
                 `}
               >
@@ -139,58 +201,56 @@ export default function PortfolioPage() {
               </button>
             ))}
           </div>
-        </BlurFade>
+        </FadeIn>
 
-        {/* Grid with smooth transitions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Filtered grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence>
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <Link href={`/portfolio/${project.id}`} className="group block">
-                  <div>
-                    {/* Image Card */}
-                    <GlassCard
-                      variant="hover"
-                      intensity="subtle"
-                      className="relative overflow-hidden h-[350px] p-0 mb-4"
-                    >
-                      {/* Background Image */}
+                <Link href={`/portfolio/${project.id}`} className="group block h-full">
+                  <div className="bg-white dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 rounded-2xl overflow-hidden hover:border-warm-sand/30 dark:hover:border-warm-sand/20 transition-colors duration-300 h-full flex flex-col">
+
+                    {/* Image */}
+                    <div className="relative h-[220px] overflow-hidden">
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                        style={{
-                          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('${project.thumbnail}')`,
-                        }}
+                        style={{ backgroundImage: `url('${project.thumbnail}')` }}
                       />
-
-                      {/* Category Tag - Top Left */}
-                      <div className="absolute top-4 left-4 z-10">
-                        <div className="inline-flex items-center gap-2 bg-warm-sand/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                          <Tag className="w-4 h-4" />
-                          <span className="text-sm font-space font-bold text-stone-900">
-                            {project.industry}
-                          </span>
-                        </div>
+                      {/* Industry badge */}
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="inline-block bg-warm-sand text-stone-900 font-space text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                          {project.industry}
+                        </span>
                       </div>
-                    </GlassCard>
+                    </div>
 
-                    {/* Content Below Card */}
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 group-hover:text-warm-sand transition-colors">
-                        {project.title}
+                    {/* Content */}
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="font-unbounded font-bold text-base text-stone-900 dark:text-neutral-100 group-hover:text-warm-sand transition-colors leading-snug mb-2">
+                        {project.title.split(' - ')[0]}
                       </h3>
-                      <p className="text-stone-600 dark:text-neutral-400 font-geist text-sm line-clamp-2">
+                      <p className="font-hanken text-sm text-stone-600 dark:text-neutral-400 line-clamp-2 leading-relaxed flex-1 mb-4">
                         {project.description}
                       </p>
-                      <p className="text-xs font-space text-stone-500 dark:text-neutral-500">
-                        {project.year}
-                      </p>
+                      {/* Footer */}
+                      <div className="flex items-center justify-between pt-3 border-t border-stone-100 dark:border-neutral-800">
+                        <span className="font-space text-xs text-stone-400 dark:text-neutral-600">
+                          {project.year}
+                        </span>
+                        <ArrowUpRight
+                          className="text-warm-sand opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          size={18}
+                        />
+                      </div>
                     </div>
+
                   </div>
                 </Link>
               </motion.div>
@@ -199,32 +259,40 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Archive Table View */}
-      <section className="container mx-auto px-4 py-20">
-        <BlurFade delay={0.7}>
-          <h2 className="text-3xl md:text-4xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 mb-12">
-            Archive
-          </h2>
-        </BlurFade>
+      {/* ─── SECTION 4: ARCHIVE TABLE ─── */}
+      <section className="container mx-auto px-4 py-24">
+        <FadeIn direction="up" duration={0.6}>
+          <div className="flex items-baseline gap-4 mb-12">
+            <h2 className="font-unbounded font-bold text-3xl md:text-4xl text-stone-900 dark:text-neutral-100">
+              Archive
+            </h2>
+            <span className="font-space text-sm text-stone-400 dark:text-neutral-600">
+              ({portfolioProjects.length})
+            </span>
+          </div>
+        </FadeIn>
 
         <div className="overflow-x-auto">
-          <table className="w-full font-space text-sm">
+          <table className="w-full text-sm">
             <thead>
-              <tr className="border-b-2 border-stone-300 dark:border-neutral-700">
-                <th className="text-left py-4 px-4 font-bold text-stone-900 dark:text-neutral-100">
-                  YEAR
+              <tr className="border-t-2 border-warm-sand border-b border-stone-200 dark:border-neutral-800">
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-warm-sand uppercase tracking-widest">
+                  #
                 </th>
-                <th className="text-left py-4 px-4 font-bold text-stone-900 dark:text-neutral-100">
-                  PROJECT
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-stone-900 dark:text-neutral-100 uppercase tracking-widest">
+                  Year
                 </th>
-                <th className="text-left py-4 px-4 font-bold text-stone-900 dark:text-neutral-100">
-                  CLIENT
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-stone-900 dark:text-neutral-100 uppercase tracking-widest">
+                  Project
                 </th>
-                <th className="text-left py-4 px-4 font-bold text-stone-900 dark:text-neutral-100">
-                  INDUSTRY
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-stone-900 dark:text-neutral-100 uppercase tracking-widest hidden md:table-cell">
+                  Client
                 </th>
-                <th className="text-left py-4 px-4 font-bold text-stone-900 dark:text-neutral-100">
-                  LINK
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-stone-900 dark:text-neutral-100 uppercase tracking-widest hidden lg:table-cell">
+                  Industry
+                </th>
+                <th className="text-left py-4 px-4 font-unbounded font-bold text-xs text-stone-900 dark:text-neutral-100 uppercase tracking-widest">
+                  Link
                 </th>
               </tr>
             </thead>
@@ -235,40 +303,46 @@ export default function PortfolioPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="index-row border-b border-stone-200 dark:border-neutral-800"
+                  className="index-row border-b border-stone-100 dark:border-neutral-800"
                 >
-                  <td className="py-4 px-4 text-stone-600 dark:text-neutral-400">
+                  <td className="py-5 px-4 font-space text-warm-sand text-xs font-bold">
+                    #{String(index + 1).padStart(2, '0')}
+                  </td>
+                  <td className="py-5 px-4 font-space text-stone-500 dark:text-neutral-500 text-xs">
                     {project.year}
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-5 px-4">
                     <Link
                       href={`/portfolio/${project.id}`}
-                      className="text-stone-900 dark:text-neutral-100 hover:text-warm-sand transition-colors font-semibold"
+                      className="font-hanken font-semibold text-stone-900 dark:text-neutral-100 hover:text-warm-sand transition-colors"
                     >
-                      {project.title}
+                      {project.title.split(' - ')[0]}
                     </Link>
                   </td>
-                  <td className="py-4 px-4 text-stone-600 dark:text-neutral-400">
+                  <td className="py-5 px-4 font-hanken text-stone-600 dark:text-neutral-400 hidden md:table-cell">
                     {project.client}
                   </td>
-                  <td className="py-4 px-4">
-                    <span className="px-3 py-1 bg-stone-200 dark:bg-neutral-800 rounded-full text-xs">
+                  <td className="py-5 px-4 hidden lg:table-cell">
+                    <span className="flex items-center gap-2 font-hanken text-stone-600 dark:text-neutral-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-warm-sand flex-shrink-0" />
                       {project.industry}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-5 px-4">
                     {project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-warm-sand hover:text-warm-sand-hover transition-colors"
+                        className="inline-flex items-center gap-1.5 font-hanken text-warm-sand hover:text-warm-sand-hover transition-colors text-sm"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="w-3.5 h-3.5" />
                         Visit
                       </a>
                     ) : (
-                      <span className="text-stone-400 dark:text-neutral-600">NDA</span>
+                      <span className="font-hanken text-stone-400 dark:text-neutral-600 text-sm">
+                        NDA
+                      </span>
                     )}
                   </td>
                 </motion.tr>
@@ -278,29 +352,38 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20">
-        <Parallax speed={0.5} direction="up">
-          <GlassCard
-            variant="static"
-            intensity="subtle"
-            className="text-center py-20 px-8"
-          >
-            <h2 className="text-4xl md:text-5xl font-jetbrains font-bold text-stone-900 dark:text-neutral-100 mb-6">
-              Ready to join them?
+      {/* ─── SECTION 5: CTA ─── */}
+      <section className="relative overflow-hidden py-32">
+        {/* Background */}
+        <div className="absolute inset-0 bg-warm-sand/10 dark:bg-warm-sand/5" />
+        <div className="absolute inset-0 bg-pattern-diagonal" />
+
+        <div className="relative container mx-auto px-4 text-center">
+          <FadeIn direction="up" duration={0.6}>
+            <h2 className="font-unbounded font-bold text-4xl md:text-5xl lg:text-6xl text-stone-900 dark:text-neutral-100 mb-6 leading-tight max-w-3xl mx-auto">
+              Ready to build something     {' '}
+              <span className="text-warm-sand">exceptional</span>?
             </h2>
-            <p className="text-xl text-stone-600 dark:text-neutral-400 font-geist mb-8 max-w-2xl mx-auto">
-              Let's build something exceptional together. From concept to launch, we'll engineer a
-              digital experience that drives real results.
+          </FadeIn>
+
+          <FadeIn direction="up" delay={0.15} duration={0.6}>
+            <p className="font-hanken text-xl text-stone-600 dark:text-neutral-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+              From concept to launch, we&apos;ll engineer a digital experience that drives
+              real results. Let&apos;s build it{' '}
+              <span className="text-warm-sand font-semibold">together</span>.
             </p>
+          </FadeIn>
+
+          <FadeIn direction="up" delay={0.3} duration={0.6}>
             <Link href="/contact">
-              <Button variant="primary" className="text-lg px-12 py-6">
-                Start Your Project <ArrowRight className="w-5 h-5 ml-2" />
+              <Button variant="primary" className="text-lg px-12 py-5">
+                Start Your Project <ArrowRight className="w-5 h-5 ml-2 inline" />
               </Button>
             </Link>
-          </GlassCard>
-        </Parallax>
+          </FadeIn>
+        </div>
       </section>
+
     </main>
   );
 }
