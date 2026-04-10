@@ -175,6 +175,7 @@ export default function AdminDashboardPage() {
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Email</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Company</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Source</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
                 </tr>
@@ -198,7 +199,12 @@ export default function AdminDashboardPage() {
                       <td className="py-4 px-4">{lead.name}</td>
                       <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.email}</td>
                       <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.company || '—'}</td>
-                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm whitespace-nowrap">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-xs font-mono">
+                        <span className="bg-slate-100 dark:bg-slate-ui px-2 py-1 rounded">
+                          {lead.source}
+                        </span>
+                      </td>
                       <td className="py-4 px-4">
                         <span className={`px-2 py-1 rounded text-xs ${
                           lead.status === 'new' ? 'bg-warm-sand/20 text-warm-sand' :

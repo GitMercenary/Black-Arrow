@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
 import { createClient } from '@/lib/supabase/client';
+import { useRegion } from '@/lib/contexts/RegionContext';
 
 export default function HeroLeadForm() {
+  const { currentRegion } = useRegion();
   const [formData, setFormData] = useState({
-    full_name: '',
+    name: '',
     email: '',
     phone: '',
   });
@@ -22,21 +24,31 @@ export default function HeroLeadForm() {
     try {
       const supabase = createClient();
 
+      // Get region ID from regions table
+      const { data: regionRecord } = await supabase
+        .from('regions')
+        .select('id')
+        .eq('code', currentRegion)
+        .single();
+
       // Insert lead into database
       const { error: dbError } = await supabase.from('leads').insert([
         {
-          full_name: formData.full_name,
+          region_id: regionRecord?.id || null, // Optional if migration 006 is applied
+          name: formData.name,
           email: formData.email,
           phone: formData.phone || null,
           source: 'homepage_hero',
           status: 'new',
+          message: 'Quick Lead from Homepage Hero', // Default for simplified form
+          budget_range: 'Not Specified', // Default for simplified form
         },
       ]);
 
       if (dbError) throw dbError;
 
       setSuccess(true);
-      setFormData({ full_name: '', email: '', phone: '' });
+      setFormData({ name: '', email: '', phone: '' });
 
       // Reset success message after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
@@ -91,8 +103,8 @@ export default function HeroLeadForm() {
           <input
             type="text"
             id="hero-full-name"
-            name="full_name"
-            value={formData.full_name}
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-gray-900 dark:text-cloud-dancer focus:ring-2 focus:ring-warm-sand focus:border-transparent outline-none transition-all"

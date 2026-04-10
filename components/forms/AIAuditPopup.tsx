@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { X, Sparkles, Check } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import { useRegion } from '@/lib/contexts/RegionContext';
 import { cn } from '@/lib/utils/cn';
 import Button from '../ui/Button';
 import FieldError from '../ui/FieldError';
@@ -13,6 +14,7 @@ interface AIAuditPopupProps {
 }
 
 export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
+  const { currentRegion } = useRegion();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -49,9 +51,17 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
     try {
       const supabase = createClient();
 
+      // Get region ID from regions table
+      const { data: regionRecord } = await supabase
+        .from('regions')
+        .select('id')
+        .eq('code', currentRegion)
+        .single();
+
       const { error: insertError } = await supabase.from('leads').insert([
         {
-          full_name: formData.fullName,
+          region_id: regionRecord?.id || null, // Optional if migration 006 is applied
+          name: formData.fullName,
           email: formData.email,
           company: formData.company,
           website: formData.website,
@@ -59,6 +69,7 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
           message: `AI Audit Request - Budget: ${formData.monthlyBudget} | Goal: ${formData.mainGoal}`,
           status: 'new',
           source: 'ai_audit_popup',
+          budget_range: formData.monthlyBudget || 'Not Specified',
           created_at: new Date().toISOString(),
         },
       ]);

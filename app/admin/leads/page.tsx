@@ -176,6 +176,7 @@ export default function LeadsPage() {
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Service</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Region</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Budget</th>
+                  <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Source</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Status</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Date</th>
                   <th className="text-left py-3 px-4 text-gray-500 dark:text-cloud-dancer/60 font-hanken font-normal text-sm">Actions</th>
@@ -184,13 +185,13 @@ export default function LeadsPage() {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={9} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
+                    <td colSpan={10} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
                       Loading...
                     </td>
                   </tr>
                 ) : filteredLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
+                    <td colSpan={10} className="text-center py-8 text-gray-400 dark:text-cloud-dancer/40">
                       No leads found
                     </td>
                   </tr>
@@ -213,7 +214,12 @@ export default function LeadsPage() {
                         })()}
                       </td>
                       <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{getRegionName(lead.region_id)}</td>
-                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-sm whitespace-nowrap">{lead.budget_range}</td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-cloud-dancer/80 text-xs font-mono">
+                        <span className="bg-gray-200 dark:bg-slate-ui/50 px-2 py-1 rounded">
+                          {lead.source}
+                        </span>
+                      </td>
                       <td className="py-4 px-4">
                         <select
                           value={lead.status}
@@ -301,6 +307,10 @@ export default function LeadsPage() {
                 <div>
                   <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Region</label>
                   <p>{getRegionName(selectedLead.region_id)}</p>
+                </div>
+                <div>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Source</label>
+                  <p className="font-mono text-sm">{selectedLead.source}</p>
                 </div>
                 <div>
                   <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Status</label>
