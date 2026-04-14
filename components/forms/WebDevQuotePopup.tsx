@@ -208,6 +208,8 @@ export default function WebDevQuotePopup() {
                     <input
                       type="text"
                       id="wdq-fullName"
+                      name="fullName"
+                      autocomplete="name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       className={cn(
@@ -229,6 +231,8 @@ export default function WebDevQuotePopup() {
                     <input
                       type="email"
                       id="wdq-email"
+                      name="email"
+                      autocomplete="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className={cn(
@@ -253,6 +257,8 @@ export default function WebDevQuotePopup() {
                     <input
                       type="text"
                       id="wdq-company"
+                      name="company"
+                      autocomplete="organization"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Acme Corp"
@@ -275,6 +281,8 @@ export default function WebDevQuotePopup() {
                     <input
                       type="tel"
                       id="wdq-phone"
+                      name="phone"
+                      autocomplete="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+44 7000 000000"
@@ -297,6 +305,8 @@ export default function WebDevQuotePopup() {
                   <input
                     type="url"
                     id="wdq-website"
+                    name="website"
+                    autocomplete="url"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     placeholder="https://example.com"

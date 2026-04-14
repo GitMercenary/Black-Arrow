@@ -120,6 +120,7 @@ export default function ContactForm() {
             type="text"
             id="name"
             name="name"
+            autocomplete="name"
             value={formData.name}
             onChange={handleChange}
             required
@@ -136,6 +137,7 @@ export default function ContactForm() {
             type="email"
             id="email"
             name="email"
+            autocomplete="email"
             value={formData.email}
             onChange={handleChange}
             required
@@ -155,6 +157,7 @@ export default function ContactForm() {
             type="tel"
             id="phone"
             name="phone"
+            autocomplete="tel"
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none transition-colors"
@@ -169,6 +172,7 @@ export default function ContactForm() {
             type="text"
             id="company"
             name="company"
+            autocomplete="organization"
             value={formData.company}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-deep-obsidian border border-slate-ui rounded-md text-cloud-dancer focus:border-warm-sand focus:outline-none transition-colors"

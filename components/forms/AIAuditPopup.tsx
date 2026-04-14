@@ -199,6 +199,8 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
                     <input
                       type="text"
                       id="fullName"
+                      name="fullName"
+                      autocomplete="name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       className={cn(
@@ -220,6 +222,8 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
                     <input
                       type="email"
                       id="email"
+                      name="email"
+                      autocomplete="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className={cn(
@@ -244,6 +248,8 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
                     <input
                       type="text"
                       id="company"
+                      name="company"
+                      autocomplete="organization"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Acme Corp"
@@ -266,6 +272,8 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
                     <input
                       type="url"
                       id="website"
+                      name="website"
+                      autocomplete="url"
                       value={formData.website}
                       onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                       placeholder="https://example.com"
