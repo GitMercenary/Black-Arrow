@@ -24,24 +24,37 @@ export default function HeroLeadForm() {
     try {
       const supabase = createClient();
 
+      // Trim inputs to prevent regex failures in DB
+      const cleanName = formData.name.trim();
+      const cleanEmail = formData.email.trim();
+      const cleanPhone = formData.phone.trim();
+
+      if (!cleanName || !cleanEmail) {
+        throw new Error('Name and Email are required');
+      }
+
       // Get region ID from regions table
-      const { data: regionRecord } = await supabase
+      const { data: regionRecord, error: regionError } = await supabase
         .from('regions')
         .select('id')
         .eq('code', currentRegion)
         .single();
 
+      if (regionError) {
+        console.warn('Region fetch error (using fallback):', regionError);
+      }
+
       // Insert lead into database
       const { error: dbError } = await supabase.from('leads').insert([
         {
-          region_id: regionRecord?.id || null, // Optional if migration 006 is applied
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || null,
+          region_id: regionRecord?.id || null,
+          name: cleanName,
+          email: cleanEmail,
+          phone: cleanPhone || null,
           source: 'homepage_hero',
           status: 'new',
-          message: 'Quick Lead from Homepage Hero', // Default for simplified form
-          budget_range: 'Not Specified', // Default for simplified form
+          message: 'Quick Lead from Homepage Hero',
+          budget_range: 'Not Specified',
         },
       ]);
 

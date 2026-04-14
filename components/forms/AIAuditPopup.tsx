@@ -51,20 +51,34 @@ export default function AIAuditPopup({ isOpen, onClose }: AIAuditPopupProps) {
     try {
       const supabase = createClient();
 
+      // Trim inputs to prevent regex failures in DB
+      const cleanName = formData.fullName.trim();
+      const cleanEmail = formData.email.trim();
+      const cleanCompany = formData.company.trim();
+      const cleanWebsite = formData.website.trim();
+
+      if (!cleanName || !cleanEmail || !cleanCompany) {
+        throw new Error('Name, Email, and Company are required');
+      }
+
       // Get region ID from regions table
-      const { data: regionRecord } = await supabase
+      const { data: regionRecord, error: regionError } = await supabase
         .from('regions')
         .select('id')
         .eq('code', currentRegion)
         .single();
 
+      if (regionError) {
+        console.warn('Region fetch error (using fallback):', regionError);
+      }
+
       const { error: insertError } = await supabase.from('leads').insert([
         {
-          region_id: regionRecord?.id || null, // Optional if migration 006 is applied
-          name: formData.fullName,
-          email: formData.email,
-          company: formData.company,
-          website: formData.website,
+          region_id: regionRecord?.id || null,
+          name: cleanName,
+          email: cleanEmail,
+          company: cleanCompany,
+          website: cleanWebsite || null,
           service_interest: 'ai_audit',
           message: `AI Audit Request - Budget: ${formData.monthlyBudget} | Goal: ${formData.mainGoal}`,
           status: 'new',
