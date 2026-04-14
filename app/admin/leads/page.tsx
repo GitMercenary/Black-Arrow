@@ -305,6 +305,23 @@ export default function LeadsPage() {
                   })()}
                 </div>
                 <div>
+                  <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Website</label>
+                  <p>
+                    {selectedLead.website ? (
+                      <a 
+                        href={selectedLead.website} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-warm-sand hover:underline flex items-center gap-1"
+                      >
+                        {selectedLead.website}
+                      </a>
+                    ) : (
+                      '—'
+                    )}
+                  </p>
+                </div>
+                <div>
                   <label className="text-sm text-gray-500 dark:text-cloud-dancer/60">Region</label>
                   <p>{getRegionName(selectedLead.region_id)}</p>
                 </div>

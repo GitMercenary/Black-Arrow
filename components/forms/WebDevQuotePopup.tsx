@@ -67,7 +67,7 @@ export default function WebDevQuotePopup() {
 
       const { error: insertError } = await supabase.from('leads').insert([
         {
-          full_name: formData.fullName,
+          name: formData.fullName,
           email: formData.email,
           company: formData.company,
           phone: formData.phone || null,

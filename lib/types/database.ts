@@ -19,6 +19,7 @@ export interface Lead {
   email: string;
   phone: string | null;
   company: string | null;
+  website: string | null;
   message: string;
   service_interest: string | null;
   budget_range: string;
